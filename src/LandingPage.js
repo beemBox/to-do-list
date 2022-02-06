@@ -12,6 +12,7 @@ export class LandingPage extends BaseComponent {
 
   render() {
     this.shadow.innerHTML = `
+    <link id="global-styles" rel="stylesheet" href="../css/style.css">
     <div class="wrapper-content">
       <aside class="box sidebar">
         <h1>ToDo-List</h1>
@@ -46,4 +47,4 @@ export class LandingPage extends BaseComponent {
   }
 }
 
-export const registerLandinPageContent = () => customElements.define('landing-page', LandingPage)
+export const registerLandingPageContent = () => customElements.define('landing-page', LandingPage)

@@ -3,12 +3,13 @@ import { registerNav } from './Nav.js'
 import { registerHeader } from './Header.js'
 import { registerHero } from './Hero.js'
 import { registerSideText } from './SideText.js'
-import { registerLandingPageContent } from './landingPage.js'
+import { registerLandingPageContent } from './LandingPage.js'
 
 const app = async () => {
   registerNav()
   registerHeader()
   registerHero()
+  registerLandingPageContent()
   registerSideText()
 }
 
@@ -26,6 +27,7 @@ class App extends BaseComponent {
       <link id="global-styles" rel="stylesheet" href="../css/style.css">
       <app-header></app-header>
       <to-do-hero></to-do-hero>
+      <landing-page></landing-page>
       <to-do-side-text></to-do-side-text>
     `
   }

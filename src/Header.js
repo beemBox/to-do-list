@@ -1,7 +1,8 @@
-export class Header extends HTMLElement {
+import { BaseComponent } from './BaseComponent.js'
+
+export class Header extends BaseComponent {
   constructor() {
     super()
-    this.shadow = this.attachShadow({ mode: 'open' })
   }
 
   connectedCallback() {
