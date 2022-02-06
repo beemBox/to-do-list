@@ -1,9 +1,4 @@
 import { BaseComponent } from './BaseComponent.js'
-import { registerNav } from './Nav.js'
-import { registerHeader } from './Header.js'
-import { registerHero } from './Hero.js'
-import { registerSideText } from './SideText.js'
-import { registerLandingPageContent } from './LandingPage.js'
 
 const app = async () => {
   registerNav()
@@ -13,7 +8,7 @@ const app = async () => {
   registerSideText()
 }
 
-class App extends BaseComponent {
+export class App extends BaseComponent {
   constructor() {
     super()
   }
@@ -37,7 +32,4 @@ class App extends BaseComponent {
   }
 }
 
-window.customElements.define('app-lister', App)
-
-
-document.addEventListener('DOMContentLoaded', app);
+export const registerApp = () => customElements.define('app-lister', App)
