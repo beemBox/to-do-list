@@ -1,4 +1,4 @@
-import { BaseComponent } from './baseComponent.js'
+import { BaseComponent } from './BaseComponent.js'
 
 export class SideText extends BaseComponent {
   constructor() {

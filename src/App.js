@@ -1,8 +1,9 @@
-import { BaseComponent } from './baseComponent.js'
-import { registerNav } from './nav.js'
-import { registerHeader } from './header.js'
-import { registerHero } from './hero.js'
-import { registerSideText } from './sidetext.js'
+import { BaseComponent } from './BaseComponent.js'
+import { registerNav } from './Nav.js'
+import { registerHeader } from './Header.js'
+import { registerHero } from './Hero.js'
+import { registerSideText } from './SideText.js'
+import { registerLandingPageContent } from './landingPage.js'
 
 const app = async () => {
   registerNav()

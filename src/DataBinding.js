@@ -1,4 +1,4 @@
-import { Observable, Computed } from './observable'
+import { Observable, Computed } from './Observable'
 
 export class DataBinding {
   execute(codeToEval) {
