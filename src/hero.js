@@ -1,11 +1,15 @@
-export class Hero extends HTMLElement {
+import { BaseComponent } from './baseComponent.js'
+
+export class Hero extends BaseComponent {
   constructor() {
     super()
-    this.shadow = this.attachShadow({ mode: 'open' })
+  }
+
+  addEventListeners() {
+
   }
 
   animateGsap() {
-    const find = selector => this.shadow.querySelectorAll(selector)
     const tl = gsap.timeline({
       defaults: {
         duration: 0.75,
@@ -13,7 +17,7 @@ export class Hero extends HTMLElement {
       }
     })
 
-    tl.fromTo(find('.img-container'),
+    tl.fromTo(this.find('.img-container'),
       {
         scale: 1.4,
         borderRadius: '0rem'
@@ -27,32 +31,32 @@ export class Hero extends HTMLElement {
       }
     );
 
-    tl.fromTo(find('.cta1'),
+    tl.fromTo(this.find('.cta1'),
       { x: '100%', opacity: 0 },
       { x: 0, opacity: 1 }, '<20%'
     )
-    tl.fromTo(find('.cta2'),
+    tl.fromTo(this.find('.cta2'),
       { y: '-100%', opacity: 0 },
       { y: 0, opacity: 1 }, '<20%'
     )
-    tl.fromTo(find('.cta3'),
+    tl.fromTo(this.find('.cta3'),
       { y: '-100%', opacity: 0 },
       { y: 0, opacity: 1 }, '<40%'
     )
-    tl.fromTo(find('.cta4'),
+    tl.fromTo(this.find('.cta4'),
       { x: '100%', opacity: 0 },
       { x: 0, opacity: 1 }, '<40%'
     )
-    tl.fromTo(find('.cta6'),
+    tl.fromTo(this.find('.cta6'),
       { x: '-100%', opacity: 0 },
       { x: 0, opacity: 1 }, '<40%'
     )
-    tl.fromTo(find('.cta5'),
+    tl.fromTo(this.find('.cta5'),
       { y: '100%', opacity: 0 },
       { y: 0, opacity: 1 }, '<40%'
     )
 
-    tl.fromTo(find('.create-list'),
+    tl.fromTo(this.find('.create-list'),
       { y: 20, opacity: 0 }, { y: 0, opacity: 1 }, '<')
   }
 
@@ -81,8 +85,7 @@ export class Hero extends HTMLElement {
         <button class="create-list">Create a new List</button>
       </div>
     </section>
-    <script src="vendors/gsap.min.js"></script>
-    <script src="animate.js"></script>`
+    `
   }
 }
 

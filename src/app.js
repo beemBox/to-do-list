@@ -1,17 +1,19 @@
+import { BaseComponent } from './baseComponent.js'
 import { registerNav } from './nav.js'
 import { registerHeader } from './header.js'
 import { registerHero } from './hero.js'
+import { registerSideText } from './sidetext.js'
 
 const app = async () => {
   registerNav()
   registerHeader()
   registerHero()
+  registerSideText()
 }
 
-class App extends HTMLElement {
+class App extends BaseComponent {
   constructor() {
     super()
-    this.shadow = this.attachShadow({ mode: 'open' })
   }
 
   connectedCallback() {
@@ -23,6 +25,7 @@ class App extends HTMLElement {
       <link id="global-styles" rel="stylesheet" href="../css/style.css">
       <app-header></app-header>
       <to-do-hero></to-do-hero>
+      <to-do-side-text></to-do-side-text>
     `
   }
 
@@ -31,7 +34,7 @@ class App extends HTMLElement {
   }
 }
 
-customElements.define('app-lister', App)
+window.customElements.define('app-lister', App)
 
 
 document.addEventListener('DOMContentLoaded', app);
