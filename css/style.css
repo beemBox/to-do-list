@@ -193,7 +193,7 @@ div.cta-text span {
 
 .sidetext {
   position: fixed;
-  left: -140px;
+  left: -145px;
   top: calc(45vh);
   transform: rotate(90deg);
   background-color: var(--second-complementary);
@@ -201,6 +201,7 @@ div.cta-text span {
   border-radius: 5px 5px 0 0;
   color: var(--background);
   margin: 5px;
+  margin-bottom: 0;
   box-shadow: 6px 1px 7px 0px var(--shadow-sidetext-box);
 }
 
