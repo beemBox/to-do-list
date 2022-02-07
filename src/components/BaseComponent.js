@@ -28,16 +28,29 @@ export class BaseComponent extends HTMLElement {
       // verificamos la cantidad de elementos con el selector indicado
       if (el.length === 1) {
         el = el[0]
-        el.addEventListener(element[1], element[2])
+        el.addEventListener(element[1], this.addPreventDefault(element[2]))
       } else if (el.length > 1) {
         el.forEach(item => {
-          item.addEventListener(element[1], element[2])
+          item.addEventListener(element[1], this.addPreventDefault(element[2]))
         })
       } else {
         // tiramos error porque no encuentra el/los elemento/s en shadow...
         // pero todavía no hice manejo de errores en el fw.
       }
     })
+  }
+
+  addPreventDefault(fn) {
+    if (!fn.toString().match('preventDafult()')) {
+      if (fn.toString().match(/\{/)) {
+        let eventParameter = fn.toString().match(/\([a-zA-Z]{1,}\)/)[0]
+        eventParameter = eventParameter.replace(/\(/, '').replace(/\)/, '')
+        fn = fn.toString().replace(/\{/, `{\n${eventParameter}.preventDefault()`)
+        fn = eval(fn)
+        return fn
+      }
+    } else
+      return fn
   }
 
   addEventListener(element, event, fn) {

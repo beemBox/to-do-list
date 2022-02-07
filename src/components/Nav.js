@@ -17,7 +17,6 @@ export class Nav extends BaseComponent {
   connectedCallback() {
     this.render()
     this.addEventListener('a', 'click', (e) => {
-      e.preventDefault()
       this.animateContentChange()
       this.routeLink(e)
     })
