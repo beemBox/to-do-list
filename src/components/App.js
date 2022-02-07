@@ -4,7 +4,8 @@ import { Router } from '../Router.js'
 export class App extends BaseComponent {
   constructor() {
     super()
-    this.content = `<content-app></content-app>`
+    this.content = ``
+    this.update = false
   }
 
   static get observedAttributes() {
@@ -12,13 +13,13 @@ export class App extends BaseComponent {
   }
 
   async updateSite() {
-    this.content = await Router.handleLocation()
-    this.render()
+    debugger
+    this.update = true
+    this.find('content-app').setAttribute('update', true)
   }
 
   attributeChangedCallback(prop, oldVal, newVal) {
     if (prop === 'operate' && newVal !== '') {
-      this.shadow.innerHTML = ''
       this.updateSite()
     }
   }
@@ -31,7 +32,7 @@ export class App extends BaseComponent {
     this.shadow.innerHTML = `
       <link id="global-styles" rel="stylesheet" href="../css/style.css">
       <app-header></app-header>
-      ${this.content}
+      <content-app update='${this.update}'></content-app>
       <to-do-side-text></to-do-side-text>
     `
   }

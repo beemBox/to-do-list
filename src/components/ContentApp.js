@@ -1,8 +1,28 @@
 import { BaseComponent } from './BaseComponent.js'
+import { Router } from '../Router.js'
 
 export class ContentApp extends BaseComponent {
   constructor() {
     super()
+    this.content = `<to-do-hero></to-do-hero>
+    <landing-page></landing-page>`
+  }
+
+  static get observedAttributes() {
+    return ['update']
+  }
+
+  async updateContent() {
+    this.content = await Router.handleLocation()
+    this.render()
+    this.setAttribute('update', false)
+  }
+
+  attributeChangedCallback(prop, oldVal, newVal) {
+    debugger
+    if (prop === 'update' && (newVal === 'true')) {
+      this.updateContent()
+    }
   }
 
   connectedCallback() {
@@ -10,11 +30,10 @@ export class ContentApp extends BaseComponent {
   }
 
   render() {
-    this.shadow.innerHTML =
-      `
+    this.shadow.innerHTML = `
       <link id="global-styles" rel="stylesheet" href="../css/style.css">
-      <to-do-hero></to-do-hero>
-      <landing-page></landing-page>`
+      ${this.content}
+      `
   }
 }
 

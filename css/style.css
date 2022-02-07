@@ -63,6 +63,15 @@ h4, h5, h6 {
   font-family: 'Cormorant', arial;
 }
 
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+button {
+  cursor: pointer;
+}
+
 .logo > h1, .logo > h2 {
   text-transform: uppercase;
   font-style: italic;
