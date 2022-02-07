@@ -19,7 +19,6 @@ const app = async () => {
 
 document.addEventListener('DOMContentLoaded', app);
 document.addEventListener('link', e => {
-  debugger
   e.target.setAttribute('operate', 'link')
   Router.handleLocation()
 })

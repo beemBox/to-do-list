@@ -13,7 +13,6 @@ export class App extends BaseComponent {
   }
 
   async updateSite() {
-    debugger
     this.update = true
     this.find('content-app').setAttribute('update', true)
   }

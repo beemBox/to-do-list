@@ -19,7 +19,6 @@ export class ContentApp extends BaseComponent {
   }
 
   attributeChangedCallback(prop, oldVal, newVal) {
-    debugger
     if (prop === 'update' && (newVal === 'true')) {
       this.updateContent()
     }
