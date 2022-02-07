@@ -92,7 +92,9 @@ export class Hero extends BaseComponent {
           <h2><span class="cta5">DO</span></h2>
           <h2><span class="cta6">LIST</span></h2>
         </div>
-        <button Link='create-list' class="create-list">Create a new List</button>
+        <button Link='create-list' class="create-list">Create a new List
+
+        </button>
       </div>
     </section>
     `
