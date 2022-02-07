@@ -1,4 +1,5 @@
 import { BaseComponent } from './BaseComponent.js'
+import { Nav } from './Nav.js'
 
 export class Header extends BaseComponent {
   constructor() {
@@ -13,18 +14,8 @@ export class Header extends BaseComponent {
     this.shadow.innerHTML = `
     <link id="global-styles" rel="stylesheet" href="../css/style.css">
     <header class="box header">
-    <nav>
-      <div class="logo">
-        <h1>My Lister</h1>
-      </div>
-      <ul>
-        <li>Algo</li>
-        <li>Nueva</li>
-        <li>Cosas</li>
-        <li>Perfil?</li>
-      </ul>
-    </nav>
-  </header>`
+      <nav-bar></nav-bar>
+    </header>`
   }
 }
 

@@ -1,16 +1,26 @@
 import { BaseComponent } from './BaseComponent.js'
-
-const app = async () => {
-  registerNav()
-  registerHeader()
-  registerHero()
-  registerLandingPageContent()
-  registerSideText()
-}
+import { Router } from '../Router.js'
 
 export class App extends BaseComponent {
   constructor() {
     super()
+    this.content = `<content-app></content-app>`
+  }
+
+  static get observedAttributes() {
+    return ['operate']
+  }
+
+  async updateSite() {
+    this.content = await Router.handleLocation()
+    this.render()
+  }
+
+  attributeChangedCallback(prop, oldVal, newVal) {
+    if (prop === 'operate' && newVal !== '') {
+      this.shadow.innerHTML = ''
+      this.updateSite()
+    }
   }
 
   connectedCallback() {
@@ -21,8 +31,7 @@ export class App extends BaseComponent {
     this.shadow.innerHTML = `
       <link id="global-styles" rel="stylesheet" href="../css/style.css">
       <app-header></app-header>
-      <to-do-hero></to-do-hero>
-      <landing-page></landing-page>
+      ${this.content}
       <to-do-side-text></to-do-side-text>
     `
   }

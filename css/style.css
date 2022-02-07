@@ -83,16 +83,21 @@ h4, h5, h6 {
   color: black;
 }
 
-.header ul {
+nav ul {
   display: flex;
   justify-content: end;
   padding-left: 0;
 }
 
-.header ul li {
+nav ul li {
   list-style: none;
   margin: 0 20px 0;
   margin: 0 20px 0 0;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: var(--complementary)
 }
 
 section.hero {
@@ -195,7 +200,7 @@ div.cta-text span {
   position: fixed;
   left: -145px;
   top: calc(45vh);
-  transform: rotate(90deg);
+  transform: rotate(90deg)!important;
   background-color: var(--second-complementary);
   padding: 0 10px 0 10px;
   border-radius: 5px 5px 0 0;
