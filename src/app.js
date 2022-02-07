@@ -7,6 +7,7 @@ import { SideText } from './components/SideText.js'
 import { LandingPage } from './components/LandingPage.js'
 import { ContentApp } from './components/ContentApp.js'
 import { MyTasks } from './components/MyTasks.js'
+import { Footer } from './components/Footer.js'
 import { ComponentsHandler } from './components/ComponentsHandler.js'
 
 // estos imports me parece que se van a ComponentsHandler.js así no me copan todo el app.js
@@ -21,8 +22,11 @@ const app = async () => {
     'side-text': SideText,
     'content-app': ContentApp,
     'landing-page': LandingPage,
+    'app-footer': Footer,
     'my-tasks': MyTasks
   }
+
+  Router.start()
 }
 
 document.addEventListener('DOMContentLoaded', app);

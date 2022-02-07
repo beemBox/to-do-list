@@ -47,9 +47,8 @@ export class Nav extends BaseComponent {
         </div>
       </a>
       <ul>
-        <li><a href='/create-list'>Nueva Tarea</a></li>
-        <li><a href='/my-tasks'>Mis Tareas</a></li>
-        <li><a href='/profile'>Crear Perfil</a></li>
+        <li><a href='/my-tasks'>My Tasks</a></li>
+        <li><a href='/profile'>Profile</a></li>
       </ul>
     </nav>`
   }

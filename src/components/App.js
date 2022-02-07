@@ -33,6 +33,7 @@ export class App extends BaseComponent {
       <app-header></app-header>
       <content-app update='${this.update}'></content-app>
       <side-text></side-text>
+      <app-footer></app-footer>
     `
   }
 

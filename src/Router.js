@@ -34,4 +34,14 @@ export class Router {
     const html = await fetch(route).then(data => data.text())
     return html
   }
+
+  static start() {
+    window.addEventListener('popstate', (e) => {
+      document.getElementsByTagName('app-lister')[0]
+        .dispatchEvent(new CustomEvent('link', {
+          bubbles: true,
+          composed: true
+        }))
+    })
+  }
 }
