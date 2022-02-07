@@ -12,13 +12,11 @@ export class MyTasks extends BaseComponent {
   constructor() {
     super()
     this.tasksList = []
-    debugger
-    this.content = this.getInnerHTML()
-    debugger
+    this.content = ''
   }
 
   connectedCallback() {
-    this.render()
+    this.updateContent()
   }
 
   render() {

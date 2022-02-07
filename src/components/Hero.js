@@ -63,6 +63,16 @@ export class Hero extends BaseComponent {
   connectedCallback() {
     this.render()
     this.animateGsap()
+    this.find('.create-list').addEventListener('click', (e) => {
+      this.routeLink(e)
+      this.animateContentChange()
+    })
+  }
+
+  animateContentChange() {
+    let theContent = this.find('#the-content')
+    gsap.to(theContent,
+      { opacity: 0, duration: 1, delay: 0.35 })
   }
 
   render() {
@@ -82,7 +92,7 @@ export class Hero extends BaseComponent {
           <h2><span class="cta5">DO</span></h2>
           <h2><span class="cta6">LIST</span></h2>
         </div>
-        <button class="create-list">Create a new List</button>
+        <button Link='create-list' class="create-list">Create a new List</button>
       </div>
     </section>
     `

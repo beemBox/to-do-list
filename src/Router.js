@@ -1,11 +1,15 @@
 import { BaseComponent } from './components/BaseComponent.js'
 
 export class Router {
+  routes = {}
 
   static route(event) {
     event = event || window.event
     event.preventDefault()
-    // event.target.href no tomaba 
+
+    if (event.target.nodeName === 'BUTTON')
+      event.target.href = event.target.getAttribute('Link')
+    // event.target.href lo devolvía como undefined
     window.history.pushState({}, '', (event.target.href || '/'))
 
     document.getElementsByTagName('app-lister')[0]
@@ -18,7 +22,8 @@ export class Router {
   static get routes() {
     return {
       '/': '../templates/landing-page.html',
-      '/mis-tareas': '../templates/my-tasks.html',
+      '/my-tasks': '../templates/my-tasks.html',
+      '/create-list': '../templates/create-list.html',
       404: '../templates/error-404.html'
     }
   }

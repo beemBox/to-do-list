@@ -11,7 +11,7 @@ export class Nav extends BaseComponent {
   }
 
   attributeChangedCallback() {
-    debugger
+
   }
 
   connectedCallback() {
@@ -19,9 +19,22 @@ export class Nav extends BaseComponent {
     let links = this.findAll('a')
     links.forEach(link => {
       link.addEventListener('click', (e) => {
-        Router.route(e)
+        e.preventDefault()
+        this.animateContentChange()
+        this.routeLink(e)
       })
     })
+  }
+
+  animateContentChange() {
+    let theContent = this.find('#the-content')
+    gsap.to(theContent,
+      {
+        opacity: 0,
+        duration: 5,
+        delay: 0.0,
+      }
+    )
   }
 
   render() {
@@ -34,9 +47,9 @@ export class Nav extends BaseComponent {
         </div>
       </a>
       <ul>
-        <li><a href='/algo'>Nueva Tarea</a></li>
-        <li><a href='/mis-tareas'>Mis Tareas</a></li>
-        <li><a href='/perfil'>Crear Perfil</a></li>
+        <li><a href='/create-list'>Nueva Tarea</a></li>
+        <li><a href='/my-tasks'>Mis Tareas</a></li>
+        <li><a href='/profile'>Crear Perfil</a></li>
       </ul>
     </nav>`
   }

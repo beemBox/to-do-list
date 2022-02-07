@@ -45,6 +45,7 @@ body {
 nav {
   display: flex;
   justify-content: space-between;
+  padding: 0 5vw;
 }
 
 
@@ -90,6 +91,9 @@ button {
 .header {
   grid-area: header;
   color: black;
+  position: fixed;
+  z-index: 22;
+  width: 100vw;
 }
 
 nav ul {
@@ -110,13 +114,23 @@ nav ul li a {
 }
 
 section.hero {
-  height: 80vh;
+  height: 100vh;
   margin: 0% 10%;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 80px 1fr 80px;
+  justify-items: center;
+  grid-template-areas:
+      "............."
+      "img-container"
+      ".............";
 }
 
 .img-container {
   height: 80vh;
   width: 100%;
+  grid-area: img-container;
   background: url("/assets/img/to-do-list-hero.jpg") center center no-repeat;
   background-position: center;
   background-size: cover;
@@ -184,7 +198,7 @@ div.cta-text span {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 80px 1fr 80px;
   grid-template-areas:
-  "....... header header"
+  "....... ....... ......."
   "sidebar content content"
   "footer  footer ......";
   background-color: transparent;
