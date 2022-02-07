@@ -32,7 +32,7 @@ export class App extends BaseComponent {
       <link id="global-styles" rel="stylesheet" href="../css/style.css">
       <app-header></app-header>
       <content-app update='${this.update}'></content-app>
-      <to-do-side-text></to-do-side-text>
+      <side-text></side-text>
     `
   }
 
@@ -40,5 +40,3 @@ export class App extends BaseComponent {
     return this;
   }
 }
-
-export const registerApp = () => customElements.define('app-lister', App)

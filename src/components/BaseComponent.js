@@ -4,6 +4,10 @@ export class BaseComponent extends HTMLElement {
     this.shadow = this.attachShadow({ mode: 'open' })
   }
 
+  static register(elementName, component) {
+    customElements.define(elementName, this)
+  }
+
   getInnerHTML() {
     let indicesPalabra = []
     let lowerCasedword = ''

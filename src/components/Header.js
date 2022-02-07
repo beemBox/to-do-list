@@ -18,5 +18,3 @@ export class Header extends BaseComponent {
     </header>`
   }
 }
-
-export const registerHeader = () => customElements.define('app-header', Header)

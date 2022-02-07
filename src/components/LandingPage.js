@@ -46,5 +46,3 @@ export class LandingPage extends BaseComponent {
     </div>`
   }
 }
-
-export const registerLandingPageContent = () => customElements.define('landing-page', LandingPage)

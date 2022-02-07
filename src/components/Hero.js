@@ -88,5 +88,3 @@ export class Hero extends BaseComponent {
     `
   }
 }
-
-export const registerHero = () => customElements.define('to-do-hero', Hero)

@@ -41,5 +41,3 @@ export class Nav extends BaseComponent {
     </nav>`
   }
 }
-
-export const registerNav = () => customElements.define('nav-bar', Nav)

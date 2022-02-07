@@ -25,5 +25,3 @@ export class MyTasks extends BaseComponent {
     this.shadow.innerHTML = this.content
   }
 }
-
-export const registerMyTasks = () => customElements.define('my-tasks', MyTasks)

@@ -60,5 +60,3 @@ export class SideText extends BaseComponent {
     `
   }
 }
-
-export const registerSideText = () => customElements.define('to-do-side-text', SideText)

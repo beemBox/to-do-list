@@ -1,23 +1,28 @@
 import { Router } from './Router.js'
-import { App, registerApp } from './components/App.js'
-import { registerNav } from './components/Nav.js'
-import { registerHeader } from './components/Header.js'
-import { registerHero } from './components/Hero.js'
-import { registerSideText } from './components/SideText.js'
-import { registerLandingPageContent } from './components/LandingPage.js'
-import { registerContentApp } from './components/ContentApp.js'
-import { registerMyTasks } from './components/MyTasks.js'
+import { App } from './components/App.js'
+import { Nav } from './components/Nav.js'
+import { Header } from './components/Header.js'
+import { Hero } from './components/Hero.js'
+import { SideText } from './components/SideText.js'
+import { LandingPage } from './components/LandingPage.js'
+import { ContentApp } from './components/ContentApp.js'
+import { MyTasks } from './components/MyTasks.js'
+import { ComponentsHandler } from './components/ComponentsHandler.js'
+
 // estos imports me parece que se van a ComponentsHandler.js así no me copan todo el app.js
 
 const app = async () => {
-  registerApp()
-  registerNav()
-  registerContentApp()
-  registerHeader()
-  registerHero()
-  registerLandingPageContent()
-  registerSideText()
-  registerMyTasks()
+  // asignamos los nombres de elementos a los componentes (para registrarlos)
+  ComponentsHandler.Components = {
+    'app-lister': App,
+    'nav-bar': Nav,
+    'app-header': Header,
+    'to-do-hero': Hero,
+    'side-text': SideText,
+    'content-app': ContentApp,
+    'landing-page': LandingPage,
+    'my-tasks': MyTasks
+  }
 }
 
 document.addEventListener('DOMContentLoaded', app);

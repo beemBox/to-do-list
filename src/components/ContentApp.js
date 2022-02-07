@@ -35,5 +35,3 @@ export class ContentApp extends BaseComponent {
       `
   }
 }
-
-export const registerContentApp = () => customElements.define('content-app', ContentApp)
