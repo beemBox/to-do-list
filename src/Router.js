@@ -5,6 +5,7 @@ export class Router {
   static route(event) {
     event = event || window.event
     event.preventDefault()
+    // event.target.href no tomaba 
     window.history.pushState({}, '', (event.target.href || '/'))
 
     document.getElementsByTagName('app-lister')[0]
@@ -17,7 +18,7 @@ export class Router {
   static get routes() {
     return {
       '/': '../templates/landing-page.html',
-      '/mis-tareas': '../templates/mis-tareas.html',
+      '/mis-tareas': '../templates/my-tasks.html',
       404: '../templates/error-404.html'
     }
   }
