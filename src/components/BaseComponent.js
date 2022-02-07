@@ -41,7 +41,7 @@ export class BaseComponent extends HTMLElement {
   }
 
   addPreventDefault(fn) {
-    if (!fn.toString().match('preventDafult()')) {
+    if (!fn.toString().match('preventDefault()')) {
       if (fn.toString().match(/\{/)) {
         let eventParameter = fn.toString().match(/\([a-zA-Z]{1,}\)/)[0]
         eventParameter = eventParameter.replace(/\(/, '').replace(/\)/, '')
