@@ -34,7 +34,7 @@ export class Nav extends BaseComponent {
   }
 
   render() {
-    this.shadow.innerHTML = `
+    this.shadow.innerHTML = /*html*/`
     <link id="global-styles" rel="stylesheet" href="../css/style.css">
     <nav>
       <a href='/'>

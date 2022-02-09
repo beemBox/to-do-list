@@ -28,6 +28,12 @@ export class Router {
     }
   }
 
+  static handlePartialLocation = async (tplName) => {
+    const path = `../templates/${tplName}.html`
+    const html = await fetch(path).then(data => data.text())
+    return html
+  }
+
   static handleLocation = async () => {
     const path = window.location.pathname
     const route = Router.routes[path] || Router.routes[404]

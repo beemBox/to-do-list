@@ -72,6 +72,23 @@ button {
   cursor: pointer;
 }
 
+nav ul {
+  display: flex;
+  justify-content: end;
+  padding-left: 0;
+}
+
+nav ul li {
+  list-style: none;
+  margin: 0 20px 0;
+  margin: 0 20px 0 0;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: var(--complementary)
+}
+
 .logo > h1, .logo > h2 {
   text-transform: uppercase;
   font-style: italic;
@@ -93,23 +110,6 @@ button {
   position: fixed;
   z-index: 22;
   width: 100vw;
-}
-
-nav ul {
-  display: flex;
-  justify-content: end;
-  padding-left: 0;
-}
-
-nav ul li {
-  list-style: none;
-  margin: 0 20px 0;
-  margin: 0 20px 0 0;
-}
-
-nav ul li a {
-  text-decoration: none;
-  color: var(--complementary)
 }
 
 section.hero {
@@ -251,15 +251,20 @@ div.cta-text span {
   display: grid;
   grid-gap: 10px 90px;
   grid-template-columns: 1fr 4fr;
-  grid-template-rows: 80px 1fr 80px;
+  grid-template-rows: 80px 1fr 7fr 80px;
   grid-template-areas:
-  "....... ....... ......."
+  "...... ....... ......."
+  "title title title"
   "menu-app content content"
-  "footer  footer ......";
+  "footer footer ......";
   background-color: transparent;
   color: var(--text);
 }
 
 .menu-app {
   grid-area: menu-app
+}
+
+.title {
+  grid-area: title
 }

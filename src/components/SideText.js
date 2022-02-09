@@ -14,7 +14,7 @@ export class SideText extends BaseComponent {
     // Animamos el sidetext fijo
     gsap.fromTo(
       this.find('.sidetext'),
-      { x: -90, opacity: 0 }, { x: 0, opacity: 1, delay: 1 }, '<70%'
+      { x: -190, opacity: 0 }, { x: 0, opacity: 1, delay: 3 }
     )
 
     // spliteamos el texto
