@@ -3,17 +3,57 @@ import { BaseComponent } from './BaseComponent.js'
 import { UserTaskList } from '../class/UserTaskList.js'
 
 export class TasksList extends BaseComponent {
-  _tasks = []
+  _taskLists = []
+  newListName = ''
+  newListObs = ''
+
   constructor() {
     super()
+    this.shadow.addEventListener('sent-new-list', this.createNewList)
+  }
+
+  createNewList() {
+    this.taskLists.push(new UserTaskList(
+      this.newListName,
+      this.newListObs
+    ))
+    this.storeLists()
+    this.setAttribute('type', 'list')
+  }
+
+  storeLists() {
+    debugger
+    localStorage.setItem('userLists', JSON.stringify(this.taskLists))
+  }
+
+  retrieveLists() {
+    let lists = JSON.parse(localStorage.getItem('userLists'))
+
+    if (lists) {
+      lists.forEach(list => {
+        this.taskLists.push(list)
+      })
+
+    }
   }
 
   static get observedAttributes() {
-    return ['type']
+    return [
+      'type',
+      'title',
+      'observations',
+      'delete',
+      'edit',
+      'listName'
+    ]
   }
 
-  set tasks(value) {
-    this._tasks = value
+  get taskLists() {
+    return this._taskLists
+  }
+
+  set taskLists(value) {
+    this._taskLists.push(value)
     this.render()
   }
 
@@ -22,9 +62,29 @@ export class TasksList extends BaseComponent {
   }
 
   attributeChangedCallback(name, oldVal, newVal) {
-    debugger
-    if (name === 'type')
+    if (name === 'type') {
+      if (newVal === 'list')
+        this.retrieveLists()
+      else if (newVal === 'create') {
+        this.newListName = ''
+        this.newListObs = ''
+      }
       this.render()
+      this.setEventListenersOnUpdate(newVal)
+    }
+  }
+
+  setEventListenersOnUpdate(newVal) {
+    if (newVal === 'create') {
+      let btn = this.find('.task__button--send-list')
+      btn.addEventListener('click', (e) => {
+        this.newListName = this.find('input[name="listName"]').value.trim()
+        this.newListObs = this.find('textarea').value.trim()
+
+        if (this.newListName !== '')
+          this.createNewList()
+      })
+    }
   }
 
   get style() {
@@ -53,27 +113,41 @@ export class TasksList extends BaseComponent {
   }
 
   render() {
+    let attr = this.getAttribute('type')
     let innerContent
     let heading
-    debugger
-    switch (this.getAttribute('type')) {
+    switch (attr) {
       case 'list':
         heading = 'Collection of Task Lists'
         innerContent = `
-          ${this.tasks && this.tasks.length > 0 ? this._tasks.map(task => /*html*/`
+          ${this.taskLists && this.taskLists.length > 0 ? this.taskLists.map(list => {
+          debugger
+          return /*html*/`
             <task-item
-              title='${task.title}'
-              observations='${task.observations}'
-              edit='${task.editBtn}'
-              delete='${task.deleteBtn}'
+              title='${list.title}'
+              observations='${list.observations}'
+              edit='${list.editBtn}'
+              delete='${list.deleteBtn}'
             >
             </task-item>
-          `).join() : 'Your collection of task lists is empty.'}`
+          `}).join() : 'Your collection of task lists is empty.'}`
         break
       case 'create':
         heading = 'Create New Task List'
-        innerContent = /**html */`
-          <task-item></task-item>
+        innerContent = /*html*/`
+          <form>
+            <input type='text'
+              name='listName'
+              placeholder='Set a name for the list...'
+              value='${this.newListName}'
+            />
+            <textarea type='text'
+              name='observations'
+              placeholder='Add some observations?'
+              value='${this.newListObs}'
+            ></textarea>
+            <button class='task__button--send-list' type='button'>Save List</button>
+          </form>
         `
         break
       default:
