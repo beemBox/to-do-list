@@ -1,5 +1,6 @@
 
 import { BaseComponent } from './BaseComponent.js'
+import { UserTaskList } from '../class/UserTaskList.js'
 
 export class TasksList extends BaseComponent {
   _tasks = []
@@ -71,6 +72,9 @@ export class TasksList extends BaseComponent {
         break
       case 'create':
         heading = 'Create New Task List'
+        innerContent = /**html */`
+          <task-item></task-item>
+        `
         break
       default:
         heading = 'Clone List'
