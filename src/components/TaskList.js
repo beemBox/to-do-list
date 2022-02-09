@@ -10,6 +10,7 @@ export class TasksList extends BaseComponent {
   constructor() {
     super()
     this.shadow.addEventListener('sent-new-list', this.createNewList)
+    this.retrieveLists()
   }
 
   createNewList() {
@@ -22,7 +23,6 @@ export class TasksList extends BaseComponent {
   }
 
   storeLists() {
-    debugger
     localStorage.setItem('userLists', JSON.stringify(this.taskLists))
   }
 
@@ -31,7 +31,12 @@ export class TasksList extends BaseComponent {
 
     if (lists) {
       lists.forEach(list => {
-        this.taskLists.push(list)
+        this.taskLists.push(new UserTaskList(
+          list._listName,
+          list._observations,
+          list._createdDate,
+          list._modifiedDate
+        ))
       })
 
     }
@@ -63,7 +68,7 @@ export class TasksList extends BaseComponent {
 
   attributeChangedCallback(name, oldVal, newVal) {
     if (name === 'type') {
-      if (newVal === 'list')
+      if (newVal === 'list' && this.taskLists.length === 0)
         this.retrieveLists()
       else if (newVal === 'create') {
         this.newListName = ''
@@ -95,18 +100,30 @@ export class TasksList extends BaseComponent {
       <style>
         :host {
           display: inline-block;
+          width: 100%;
         }
 
         :host * {
           box-sizing: border-box;
         }
 
-        .tasks__section .tasks__list {
+        .lists__section .lists__collection {
           padding: 0 20px;
           display: grid;
           grid-template-columns: minmax(150px, 1fr);
           grid-auto-rows: 1fr;
           grid-gap: 5px;
+        }
+
+        .lists__collection .lists__item{
+          display: flex;
+          justify-content: space-between;
+        }
+
+        .lists__form {
+          display: flex;
+          flex-direction: column;
+          justify-content: start;
         }
       </style>
     `
@@ -119,23 +136,28 @@ export class TasksList extends BaseComponent {
     switch (attr) {
       case 'list':
         heading = 'Collection of Task Lists'
+        let listItems
+
+        if (this.taskLists && this.taskLists.length > 0)
+          listItems = this.taskLists.map((list, i) => {
+            return `
+            <div class='lists__item' id='${i}'>
+              <span>${list.name}</span><span>Created: ${list.createdDate}</span>
+            </div>
+          `}).join()
+        else listItems = 'Your collection of task lists is empty.'
+
         innerContent = `
-          ${this.taskLists && this.taskLists.length > 0 ? this.taskLists.map(list => {
-          debugger
-          return /*html*/`
-            <task-item
-              title='${list.title}'
-              observations='${list.observations}'
-              edit='${list.editBtn}'
-              delete='${list.deleteBtn}'
-            >
-            </task-item>
-          `}).join() : 'Your collection of task lists is empty.'}`
+            <section class='lists__section'>
+              <div class='lists__collection'>
+                ${listItems}
+            </div>
+          </section>`
         break
       case 'create':
         heading = 'Create New Task List'
         innerContent = /*html*/`
-          <form>
+          <form class='lists__form'>
             <input type='text'
               name='listName'
               placeholder='Set a name for the list...'

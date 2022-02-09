@@ -1,3 +1,5 @@
+import { Helper } from './Helper.js'
+
 export class UserTaskList {
   constructor(listName, observations, createdDate, modifiedDate) {
     this._listName = listName
@@ -23,7 +25,7 @@ export class UserTaskList {
   }
 
   get createdDate() {
-    return this._createdDate // tengo que formatear la fecha
+    return Helper.formatDate(this._createdDate)
   }
 
   set createdDate(value) {
