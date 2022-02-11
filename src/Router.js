@@ -12,6 +12,8 @@ export class Router {
     // event.target.href lo devolvía como undefined
     window.history.pushState({}, '', (event.target.href || '/'))
 
+    // tengo que hacer genérica esta parte porque tiene el 
+    // nombre de la app to-do-list... que es horrible encima jaja
     document.getElementsByTagName('app-lister')[0]
       .dispatchEvent(new CustomEvent('link', {
         bubbles: true,

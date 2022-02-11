@@ -16,9 +16,13 @@ export class Nav extends BaseComponent {
 
   connectedCallback() {
     this.render()
-    this.addEventListener('a', 'click', (e) => {
-      this.animateContentChange()
-      this.routeLink(e)
+    let btns = this.findAll('a')
+
+    btns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        this.animateContentChange()
+        this.routeLink(e)
+      })
     })
   }
 
