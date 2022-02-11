@@ -1,4 +1,4 @@
-import { BaseComponent } from './BaseComponent.js'
+import { BaseComponent } from '../../@mini-core/BaseComponent.js'
 import { Nav } from './Nav.js'
 
 export class Header extends BaseComponent {

@@ -1,5 +1,5 @@
-import { BaseComponent } from './BaseComponent.js'
-import { Router } from '../Router.js'
+import { BaseComponent } from '../../@mini-core/BaseComponent.js'
+import { Router } from '../../@mini-core/Router.js'
 
 export class App extends BaseComponent {
   constructor() {

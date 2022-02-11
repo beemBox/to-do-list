@@ -1,6 +1,6 @@
-import { BaseComponent } from './BaseComponent.js'
+import { BaseComponent } from '../../@mini-core/BaseComponent.js'
 import { Task } from './Task.js'
-import { Router } from '../Router.js'
+import { Router } from '../../@mini-core/Router.js'
 
 // Acá voy a poner lo que teóricamente en el ejercicio del Prompt era TaskList
 // pero sí lo acompaño de una clase Task, sí la voy a hacer componente u_u

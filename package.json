@@ -5,7 +5,8 @@
   "main": "dist/app.js",
   "es6": "src/app.js",
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "start": "webpack-dev-server --mode development --open"
   },
   "keywords": [],
   "author": "Mariano Silva",
@@ -36,6 +37,7 @@
     "core-js": "^3.21.0",
     "html-webpack-plugin": "^5.5.0",
     "webpack": "^5.68.0",
-    "webpack-cli": "^4.9.2"
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4"
   }
 }

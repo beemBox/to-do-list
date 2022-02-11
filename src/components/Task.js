@@ -1,5 +1,5 @@
-import { BaseComponent } from './BaseComponent.js'
-import { template } from '../../templates/task.js'
+import { BaseComponent } from '../../@mini-core/BaseComponent.js'
+import { template } from '../templates/task.js'
 
 export class Task extends BaseComponent {
   constructor(taskName, dateTask, created, modified) {

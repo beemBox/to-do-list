@@ -1,4 +1,4 @@
-import { BaseComponent } from './BaseComponent.js'
+import { BaseComponent } from '../../@mini-core/BaseComponent.js'
 
 export class AppMenu extends BaseComponent {
   constructor() {

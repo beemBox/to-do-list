@@ -1,4 +1,4 @@
-import { BaseComponent } from './BaseComponent.js'
+import { BaseComponent } from '../../@mini-core/BaseComponent.js'
 
 export class LandingPage extends BaseComponent {
   constructor() {

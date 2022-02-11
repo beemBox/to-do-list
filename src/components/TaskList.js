@@ -1,5 +1,5 @@
 
-import { BaseComponent } from './BaseComponent.js'
+import { BaseComponent } from '../../@mini-core/BaseComponent.js'
 import { UserTaskList } from '../class/UserTaskList.js'
 
 export class TasksList extends BaseComponent {

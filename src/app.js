@@ -1,4 +1,4 @@
-import { Router } from './Router.js'
+import { Router } from '../@mini-core/Router.js'
 import { App } from './components/App.js'
 import { Nav } from './components/Nav.js'
 import { Header } from './components/Header.js'
@@ -9,8 +9,8 @@ import { ContentApp } from './components/ContentApp.js'
 import { MyTasks } from './components/MyTasks.js'
 import { Footer } from './components/Footer.js'
 import { TasksList } from './components/TaskList.js'
-import { AppMenu } from './components/AppMenu.js'
-import { ComponentsHandler } from './components/ComponentsHandler.js'
+import { AppMenu } from './components/AppMenu'
+import { ComponentsHandler } from '../@mini-core/ComponentsHandler.js'
 
 // estos imports me parece que se van a ComponentsHandler.js así no me copan todo el app.js
 

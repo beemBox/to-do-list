@@ -1,4 +1,4 @@
-import { Router } from '../Router.js'
+import { Router } from './Router.js'
 import { ComponentsHandler } from './ComponentsHandler.js'
 
 export class BaseComponent extends HTMLElement {
@@ -40,6 +40,9 @@ export class BaseComponent extends HTMLElement {
     })
   }
 
+  // este es un ejemplo de no respetar los principios DRY y YAGNI
+  // ya hacía esto de la manera más fácil directamente en el Router
+  // que recibía eventos y les metía un preventDefault()... u_u
   addPreventDefault(fn) {
     if (!fn.toString().match('preventDefault()')) {
       if (fn.toString().match(/\{/)) {
