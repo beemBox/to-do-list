@@ -23,6 +23,8 @@
   --complementary: #E35B5D;
   --second-complementary: #fde652;
   --shadow-sidetext-box: #0c111a;
+  --input-analog: #43719c;
+  --input-analog-hover: #284866;
 }
 
 * {
@@ -174,14 +176,32 @@ div.cta-text span {
   text-shadow: var(--title) 0px 0px 40px;
 }
 
-.cta > button.create-list {
+button.app__btn {
   margin: 1rem;
   padding: 0.5rem 2rem;
   border-radius: 0.3rem;
-  background: var(--complementary);
   color: #fff;
   border: none;
   font-size: 1rem;
+}
+
+button.app__btn--menu {
+  margin: 0.3rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.3rem;
+  color: #fff;
+  border: none;
+  font-size: 1rem;
+  background: var(--input-analog);
+}
+
+button.app__btn--menu:hover {
+  background:var(--input-analog-hover);
+}
+
+
+button.app__btn--red {
+  background: var(--complementary);
 }
 
 .footer {

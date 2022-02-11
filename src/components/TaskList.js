@@ -28,7 +28,7 @@ export class TasksList extends BaseComponent {
 
   retrieveLists() {
     let lists = JSON.parse(localStorage.getItem('userLists'))
-
+    debugger
     if (lists) {
       lists.forEach(list => {
         this.taskLists.push(new UserTaskList(
@@ -107,10 +107,33 @@ export class TasksList extends BaseComponent {
           box-sizing: border-box;
         }
 
+        .lists__section {
+          position: relative;
+          border-radius: 5px;
+          overflow: hidden;
+          padding: calc(1vw + 0.1vw);
+          display: grid;
+          grid-template-columns: 1fr;
+          grid-template-rows: 5fr;
+          grid-gap: 1vh;
+        }
+
+        .lists__section::before {
+          content: '';
+          background-color: #000;
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          z-index: -1;
+          opacity: 0.2;
+        }
+
         .lists__section .lists__collection {
           padding: 0 20px;
           display: grid;
-          grid-template-columns: minmax(150px, 1fr);
+          grid-template-columns: 1fr;
           grid-auto-rows: 1fr;
           grid-gap: 5px;
         }
@@ -147,9 +170,9 @@ export class TasksList extends BaseComponent {
           `}).join()
         else listItems = 'Your collection of task lists is empty.'
 
-        innerContent = `
+        innerContent = /*html*/`
             <section class='lists__section'>
-              <div class='lists__collection'>
+              <div class='lists__row'>
                 ${listItems}
             </div>
           </section>`
@@ -158,16 +181,25 @@ export class TasksList extends BaseComponent {
         heading = 'Create New Task List'
         innerContent = /*html*/`
           <form class='lists__form'>
-            <input type='text'
-              name='listName'
-              placeholder='Set a name for the list...'
-              value='${this.newListName}'
-            />
-            <textarea type='text'
-              name='observations'
-              placeholder='Add some observations?'
-              value='${this.newListObs}'
-            ></textarea>
+            <div class='input__container'>
+              <input
+                class='menu__input--text'
+                type='text'
+                name='listName'
+                placeholder='Set a name for the list...'
+                value='${this.newListName}'
+              />
+            </div>
+            <div classw='input__container'>
+              <textarea
+
+                type='text'
+                name='observations'
+                placeholder='Add some observations?'
+                value='${this.newListObs}'
+              ></textarea>
+            </div>
+
             <button class='task__button--send-list' type='button'>Save List</button>
           </form>
         `
@@ -179,11 +211,11 @@ export class TasksList extends BaseComponent {
     this.shadow.innerHTML = /*html*/`
         <link id="global-styles" rel="stylesheet" href="../css/style.css">
         ${this.style}
-        <section class='tasks__section'>
-          <slot name='tasks__heading'>
+        <section class='lists__section'>
+          <slot name='lists__heading'>
             <h2>${heading}</h2>
           </slot>
-          <div class='tasks__list'>
+          <div class='lists__collection'>
             ${innerContent}
           </div>
         </section >`

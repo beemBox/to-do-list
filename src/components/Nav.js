@@ -17,7 +17,7 @@ export class Nav extends BaseComponent {
   connectedCallback() {
     this.render()
     let btns = this.findAll('a')
-
+    // respetamos el YAGNI principle y volvemos esto a la normalidad
     btns.forEach(btn => {
       btn.addEventListener('click', (e) => {
         this.animateContentChange()

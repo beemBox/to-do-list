@@ -68,9 +68,9 @@ export class AppMenu extends BaseComponent {
         <h2>Menu</h2>
       </slot>
       <div class='app-menu__options'>
-        <button class='app-menu__btn--create'>Create List</button>
-        <button class='app-menu__btn--clone'>Clone List</button>
-        <button class='app-menu__btn--remove'>Remove Lists</button>
+        <button class='app__btn--menu create'>Create List</button>
+        <button class='app__btn--menu clone'>Clone List</button>
+        <button class='app__btn--menu remove'>Remove Lists</button>
       </div>
     </section>
     `

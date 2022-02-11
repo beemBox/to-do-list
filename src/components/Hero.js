@@ -56,14 +56,14 @@ export class Hero extends BaseComponent {
       { y: 0, opacity: 1 }, '<40%'
     )
 
-    tl.fromTo(this.find('.create-list'),
+    tl.fromTo(this.find('.app__btn'),
       { y: 20, opacity: 0 }, { y: 0, opacity: 1 }, '<')
   }
 
   connectedCallback() {
     this.render()
     this.animateGsap()
-    this.find('.create-list').addEventListener('click', (e) => {
+    this.find('.app__btn').addEventListener('click', (e) => {
       this.routeLink(e)
       this.animateContentChange()
     })
@@ -92,7 +92,7 @@ export class Hero extends BaseComponent {
           <h2><span class="cta5">DO</span></h2>
           <h2><span class="cta6">LIST</span></h2>
         </div>
-        <button Link='create-list' class="create-list">Create a new List
+        <button Link='create-list' class="app__btn app__btn--red">Create a new List
 
         </button>
       </div>
