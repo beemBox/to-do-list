@@ -1,8 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-const srcDir = 'src/'
-const distDir = '/dist/'
+const srcDir = 'src'
 
 module.exports = {
   entry: path.resolve(__dirname, srcDir + '/app.js'),
@@ -14,9 +13,9 @@ module.exports = {
     }
   },
   output: {
-    path: path.resolve(__dirname, distDir),
+    path: path.resolve(__dirname, 'dist'),
     filename: 'app.js',
-    library: '$',
+    publicPath: '/dist/',
     libraryTarget: 'umd',
     environment: {
       arrowFunction: false,
@@ -43,4 +42,12 @@ module.exports = {
     })
   ],
   mode: 'development',
+  devServer: {
+    static: {
+      directory: path.join(__dirname, 'dist')
+    },
+    client: {
+      overlay: true
+    }
+  }
 }
