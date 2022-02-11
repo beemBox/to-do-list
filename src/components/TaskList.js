@@ -28,7 +28,7 @@ export class TasksList extends BaseComponent {
 
   retrieveLists() {
     let lists = JSON.parse(localStorage.getItem('userLists'))
-    debugger
+
     if (lists) {
       lists.forEach(list => {
         this.taskLists.push(new UserTaskList(
@@ -161,14 +161,15 @@ export class TasksList extends BaseComponent {
         heading = 'Collection of Task Lists'
         let listItems
 
-        if (this.taskLists && this.taskLists.length > 0)
+        if (this.taskLists && this.taskLists.length > 0) {
           listItems = this.taskLists.map((list, i) => {
             return `
             <div class='lists__item' id='${i}'>
               <span>${list.name}</span><span>Created: ${list.createdDate}</span>
             </div>
-          `}).join()
-        else listItems = 'Your collection of task lists is empty.'
+          `}).join('')
+          debugger
+        } else listItems = 'Your collection of task lists is empty.'
 
         innerContent = /*html*/`
             <section class='lists__section'>
