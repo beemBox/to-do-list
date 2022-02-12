@@ -6,9 +6,7 @@
   "es6": "src/app.mjs",
   "scripts": {
     "build": "webpack",
-    "dev-mode": "webpack-dev-server --mode development --open",
-    "debug": "node --inspect --inspect-brk ./src/app.mjs",
-    "dev:debug": "debug -- --mode development"
+    "dev-mode": "webpack-dev-server --mode development --open"
   },
   "keywords": [],
   "author": "Mariano Silva",
