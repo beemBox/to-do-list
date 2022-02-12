@@ -1,5 +1,5 @@
-import BaseComponent from '../../@mini-core/BaseComponent.js'
-import Router from '../../@mini-core/Router.js'
+import BaseComponent from './BaseComponent.js'
+import Router from './Router.js'
 
 export default class ContentApp extends BaseComponent {
   constructor() {
