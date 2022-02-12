@@ -77,7 +77,7 @@ export default class ContentApp extends BaseComponent {
 
   render() {
     this.shadow.innerHTML = `
-      <link id="global-styles" rel="stylesheet" href="../css/style.css">
+      
       <div id='the-content'>
       ${this.content}
       </div>

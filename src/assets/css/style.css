@@ -1,17 +1,17 @@
 @font-face {
   font-family: 'Exo';
-  src: url("/assets/fonts/Exo/static/Exo-ExtraLight.ttf"),
-  url("/assets/fonts/Exo/static/Exo-Regular.ttf");
+  src: url("../fonts/Exo/static/Exo-ExtraLight.ttf"),
+  url("../fonts/Exo/static/Exo-Regular.ttf");
 }
 
 @font-face {
   font-family: 'Cormorant';
-  src: url("/assets/fonts/Cormorant/Cormorant-Regular.ttf");
+  src: url("../fonts/Cormorant/Cormorant-Regular.ttf");
 }
 
 @font-face {
   font-family: 'Hind Gutur';
-  src: url("/assets/fonts/Hind_Guntur/HindGuntur-Light.ttf")
+  src: url("../fonts/Hind_Guntur/HindGuntur-Light.ttf")
 }
 
 :root {
@@ -132,7 +132,7 @@ section.hero {
   height: 80vh;
   width: 100%;
   grid-area: img-container;
-  background: url("/assets/img/to-do-list-hero.jpg") center center no-repeat;
+  background: url("../img/to-do-list-hero.jpg") center center no-repeat;
   background-position: center;
   background-size: cover;
   position: relative;

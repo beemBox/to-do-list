@@ -61,7 +61,7 @@ export default class AppMenu extends BaseComponent {
 
   render() {
     this.shadow.innerHTML = /*html*/`
-    <link id="global-styles" rel="stylesheet" href="../css/style.css">
+    
     ${this.style}
     <section class='app-menu__section'>
       <slot name="app-menu__heading">

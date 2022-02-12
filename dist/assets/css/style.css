@@ -1,17 +1,20 @@
+/*!****************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/assets/css/style.css ***!
+  \****************************************************************************/
 @font-face {
   font-family: 'Exo';
-  src: url("/assets/fonts/Exo/static/Exo-ExtraLight.ttf"),
-  url("/assets/fonts/Exo/static/Exo-Regular.ttf");
+  src: url(/dist/1e42eab5aede458b89ef.ttf),
+  url(/dist/313a9b269c0d9fa9438f.ttf);
 }
 
 @font-face {
   font-family: 'Cormorant';
-  src: url("/assets/fonts/Cormorant/Cormorant-Regular.ttf");
+  src: url(/dist/992c95260ce56d879fdb.ttf);
 }
 
 @font-face {
   font-family: 'Hind Gutur';
-  src: url("/assets/fonts/Hind_Guntur/HindGuntur-Light.ttf")
+  src: url(/dist/701488fc680377d51f19.ttf)
 }
 
 :root {
@@ -132,7 +135,7 @@ section.hero {
   height: 80vh;
   width: 100%;
   grid-area: img-container;
-  background: url("/assets/img/to-do-list-hero.jpg") center center no-repeat;
+  background: url(/dist/968e066b6b3d4dadadcf.jpg) center center no-repeat;
   background-position: center;
   background-size: cover;
   position: relative;

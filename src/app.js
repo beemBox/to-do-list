@@ -1,3 +1,6 @@
+
+import './assets/css/style.css'
+import './assets/vendors/gsap.min.js'
 import Router from '../@mini-core/Router.js'
 import ComponentsHandler from '../@mini-core/ComponentsHandler.js'
 import App from '../@mini-core/App.js'

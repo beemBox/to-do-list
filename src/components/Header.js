@@ -12,7 +12,7 @@ export default class Header extends BaseComponent {
 
   render() {
     this.shadow.innerHTML = `
-    <link id="global-styles" rel="stylesheet" href="../css/style.css">
+    
     <header class="box header">
       <nav-bar></nav-bar>
     </header>`

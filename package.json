@@ -1,11 +1,12 @@
 {
-  "name": "MyLister-Demo",
+  "name": "mylister-demo",
   "version": "1.0.0",
   "description": "",
   "main": "dist/app.js",
-  "es6": "src/app.mjs",
+  "es6": "src/app.js",
   "scripts": {
     "build": "webpack",
+    "debug:webpack": "node --inspect --inspect-brk ./node_modules/webpack/bin/webpack.js",
     "dev-mode": "webpack-dev-server --mode development --open"
   },
   "keywords": [],
@@ -36,7 +37,9 @@
     "babel-plugin": "^1.0.7",
     "core-js": "^3.21.0",
     "css-loader": "^6.6.0",
+    "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.5.3",
     "style-loader": "^3.3.1",
     "webpack": "^5.68.0",
     "webpack-cli": "^4.9.2",
