@@ -1,6 +1,6 @@
-import { BaseComponent } from '../../@mini-core/BaseComponent.js'
+import BaseComponent from '../../@mini-core/BaseComponent.js'
 
-export class LandingPage extends BaseComponent {
+export default class LandingPage extends BaseComponent {
   constructor() {
     super()
   }

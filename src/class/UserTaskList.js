@@ -1,6 +1,6 @@
-import { Helper } from './Helper.js'
+import Helper from './Helper.js'
 
-export class UserTaskList {
+export default class UserTaskList {
   constructor(listName, observations, createdDate, modifiedDate) {
     this._listName = listName
     this._observations = observations

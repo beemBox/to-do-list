@@ -1,6 +1,6 @@
-import { BaseComponent } from '../../@mini-core/BaseComponent.js'
+import BaseComponent from '../../@mini-core/BaseComponent.js'
 
-export class SideText extends BaseComponent {
+export default class SideText extends BaseComponent {
   constructor() {
     super()
   }

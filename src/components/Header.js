@@ -1,7 +1,7 @@
-import { BaseComponent } from '../../@mini-core/BaseComponent.js'
-import { Nav } from './Nav.js'
+import BaseComponent from '../../@mini-core/BaseComponent.js'
+import Nav from './Nav.js'
 
-export class Header extends BaseComponent {
+export default class Header extends BaseComponent {
   constructor() {
     super()
   }

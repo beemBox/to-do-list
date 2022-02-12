@@ -1,7 +1,7 @@
-import { Router } from './Router.js'
-import { ComponentsHandler } from './ComponentsHandler.js'
+import Router from './Router.js'
+import ComponentsHandler from './ComponentsHandler.js'
 
-export class BaseComponent extends HTMLElement {
+export default class BaseComponent extends HTMLElement {
   constructor() {
     super()
     this.shadow = this.attachShadow({ mode: 'open' })

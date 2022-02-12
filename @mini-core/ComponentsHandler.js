@@ -1,6 +1,4 @@
-
-
-export class ComponentsHandler {
+export default class ComponentsHandler {
   static components = {}
   static get Components() {
     return ComponentsHandler.components

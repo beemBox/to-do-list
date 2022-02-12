@@ -1,6 +1,6 @@
-import { BaseComponent } from '../../@mini-core/BaseComponent.js'
-import { Task } from './Task.js'
-import { Router } from '../../@mini-core/Router.js'
+import BaseComponent from '../../@mini-core/BaseComponent.js'
+import Task from './Task.js'
+import Router from '../../@mini-core/Router.js'
 
 // Acá voy a poner lo que teóricamente en el ejercicio del Prompt era TaskList
 // pero sí lo acompaño de una clase Task, sí la voy a hacer componente u_u
@@ -8,7 +8,7 @@ import { Router } from '../../@mini-core/Router.js'
 // pero más adelante la idea es usar firebase.
 // voy a tener que hacer una clase que sea como un repository para handlear data
 // del gateway y services así como de localStorage
-export class MyTasks extends BaseComponent {
+export default class MyTasks extends BaseComponent {
   _tasksList = []
 
   constructor() {

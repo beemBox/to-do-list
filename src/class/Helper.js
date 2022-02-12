@@ -1,4 +1,4 @@
-export class Helper {
+export default class Helper {
   static formatDate(date) {
     date = new Date(date)
     let day = date.getDate()

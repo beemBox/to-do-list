@@ -1,6 +1,6 @@
-import { BaseComponent } from '../../@mini-core/BaseComponent.js'
+import BaseComponent from '../../@mini-core/BaseComponent.js'
 
-export class Footer extends BaseComponent {
+export default class Footer extends BaseComponent {
   constructor() {
     super()
   }

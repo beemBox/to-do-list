@@ -1,6 +1,6 @@
-import { BaseComponent } from '../../@mini-core/BaseComponent.js'
+import BaseComponent from '../../@mini-core/BaseComponent.js'
 
-export class AppMenu extends BaseComponent {
+export default class AppMenu extends BaseComponent {
   constructor() {
     super()
     this.shadow.addEventListener('option-select', this.handleEvent)

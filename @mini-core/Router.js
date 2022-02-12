@@ -1,6 +1,6 @@
 import { BaseComponent } from './BaseComponent.js'
 
-export class Router {
+export default class Router {
   routes = {}
 
   static route(event) {

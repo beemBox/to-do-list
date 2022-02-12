@@ -1,7 +1,7 @@
-import { BaseComponent } from '../../@mini-core/BaseComponent.js'
-import { template } from '../templates/task.js'
+import BaseComponent from '../../@mini-core/BaseComponent.js'
+import template from '../templates/task.js'
 
-export class Task extends BaseComponent {
+export default class Task extends BaseComponent {
   constructor(taskName, dateTask, created, modified) {
     this._taskName = taskName
     this._status = 0

@@ -1,6 +1,6 @@
-import { BaseComponent } from '../../@mini-core/BaseComponent.js'
+import BaseComponent from '../../@mini-core/BaseComponent.js'
 
-export class Hero extends BaseComponent {
+export default class Hero extends BaseComponent {
   constructor() {
     super()
   }

@@ -1,8 +1,7 @@
+import BaseComponent from '../../@mini-core/BaseComponent.js'
+import UserTaskList from '../class/UserTaskList.js'
 
-import { BaseComponent } from '../../@mini-core/BaseComponent.js'
-import { UserTaskList } from '../class/UserTaskList.js'
-
-export class TasksList extends BaseComponent {
+export default class TasksList extends BaseComponent {
   _taskLists = []
   newListName = ''
   newListObs = ''

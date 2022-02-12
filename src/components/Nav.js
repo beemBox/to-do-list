@@ -1,7 +1,7 @@
-import { BaseComponent } from '../../@mini-core/BaseComponent.js'
-import { Router } from '../../@mini-core/Router.js'
+import BaseComponent from '../../@mini-core/BaseComponent.js'
+import Router from '../../@mini-core/Router.js'
 
-export class Nav extends BaseComponent {
+export default class Nav extends BaseComponent {
   constructor() {
     super()
   }
