@@ -1,7 +1,9 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const FileLoader = require('file-loader')
+const { dirname } = require('path')
+const CopyPlugin = require('copy-webpack-plugin')
+const LinkTypePlugin = require('html-webpack-link-type-plugin').HtmlWebpackLinkTypePlugin
 
 const title = 'My Lister'
 
@@ -9,12 +11,11 @@ const srcDir = 'src/'
 
 module.exports = {
   entry: {
-    app: path.resolve(__dirname, srcDir + '/app.js'),
+    app: path.resolve(__dirname, srcDir + '/app.js')
   },
   resolve: {
     alias: {
-      'mini-components': path.resolve(__dirname, '@mini-core/components/'),
-      templates: path.resolve(__dirname, srcDir + 'templates/'),
+      templates: path.resolve(__dirname, 'templates/'),
       extensions: ['.js', '.json']
     }
   },
@@ -36,23 +37,22 @@ module.exports = {
     rules: [
       {
         test: /\.(js)$/,
-        exclude: /node_modules/,
+        exclude: /(node_modules|assets\/vendors)*/,
+        include: /class/,
         use: 'babel-loader',
       },
       {
-        test: /\.(js)$/,
-        type: 'asset/resource',
-        use: [{
-          loader: 'file-loader',
-          options: {
-            name: '[name].[ext]',
-            outputPath: 'assets/vendors/'
-          }
-        }]
+        test: /\.(html)$/i,
+        include: /tempaltes/,
+        use: 'html-loader',
       },
       {
         test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: [{
+          loader: MiniCssExtractPlugin.loader,
+          options: {}
+        }, 'css-loader'],
+        exclude: /node_modules/
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
@@ -64,18 +64,6 @@ module.exports = {
             outputPath: 'assets/img/'
           }
         }]
-      },
-      {
-        test: /\.(ttf)$/i,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]',
-              outputPath: 'assets/fonts/',
-            }
-          }
-        ]
       }
     ],
   },
@@ -87,9 +75,22 @@ module.exports = {
     }),
     new MiniCssExtractPlugin({
       filename: 'assets/css/style.css'
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: "src/assets", to: "assets" },
+        { from: "src/templates", to: "templates" },
+      ],
+    }),
+    new LinkTypePlugin({
+      '*.css': 'text/css'
     })
   ],
   mode: 'development',
+  devtool: 'source-map',
+  stats: {
+    children: true
+  },
   devServer: {
     static: {
       directory: path.join(__dirname, 'dist')

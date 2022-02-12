@@ -1,4 +1,4 @@
-import BaseComponent from '../../@mini-core/BaseComponent.js'
+import BaseComponent from '../@mini-core/BaseComponent.js'
 import template from '../templates/task.js'
 
 export default class Task extends BaseComponent {

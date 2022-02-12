@@ -5,7 +5,7 @@ export default class ContentApp extends BaseComponent {
   constructor() {
     super()
     this.content = ''
-    this.shadow.addEventListener('option-select', this.handleEvent)
+    this.addEventListener('option-select', this.handleEvent)
   }
 
 
@@ -57,8 +57,8 @@ export default class ContentApp extends BaseComponent {
     for (const mutation of mutations)
       added.push(...mutation.addedNodes)
 
-    console.log({ added: added.filter(el => el.nodeType === Node.ELEMENT_NODE) })
-    console.log(added)
+    // console.log({ added: added.filter(el => el.nodeType === Node.ELEMENT_NODE) })
+    // console.log(added)
   }
 
   unsetChildrenComponentsObserver() {
@@ -76,7 +76,7 @@ export default class ContentApp extends BaseComponent {
 
 
   render() {
-    this.shadow.innerHTML = `
+    this.innerHTML = `
       
       <div id='the-content'>
       ${this.content}

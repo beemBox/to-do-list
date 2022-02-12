@@ -4,7 +4,6 @@ import ComponentsHandler from './ComponentsHandler.js'
 export default class BaseComponent extends HTMLElement {
   constructor() {
     super()
-    this.shadow = this.attachShadow({ mode: 'open' })
     this.content = ''
   }
 
@@ -93,6 +92,6 @@ export default class BaseComponent extends HTMLElement {
     }
   }
 
-  findAll = selector => this.shadow.querySelectorAll(selector)
-  find = selector => this.shadow.querySelector(selector)
+  findAll = selector => this.querySelectorAll(selector)
+  find = selector => this.querySelector(selector)
 }

@@ -1,4 +1,4 @@
-import BaseComponent from '../../@mini-core/BaseComponent.js'
+import BaseComponent from '../@mini-core/BaseComponent.js'
 
 export default class LandingPage extends BaseComponent {
   constructor() {
@@ -11,6 +11,6 @@ export default class LandingPage extends BaseComponent {
 
 
   render() {
-    this.shadow.innerHTML = this.content
+    this.innerHTML = this.content
   }
 }

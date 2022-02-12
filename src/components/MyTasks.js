@@ -1,6 +1,6 @@
-import BaseComponent from '../../@mini-core/BaseComponent.js'
+import BaseComponent from '../@mini-core/BaseComponent.js'
 import Task from './Task.js'
-import Router from '../../@mini-core/Router.js'
+import Router from '../@mini-core/Router.js'
 
 // Acá voy a poner lo que teóricamente en el ejercicio del Prompt era TaskList
 // pero sí lo acompaño de una clase Task, sí la voy a hacer componente u_u
@@ -17,7 +17,7 @@ export default class MyTasks extends BaseComponent {
       menu: '<app-menu></app-menu>',
       section: `<tasks-list type='list'></tasks-list>`
     }
-    this.shadow.addEventListener('option-select', this)
+    this.addEventListener('option-select', this)
   }
 
   handleEvent(e) {
@@ -66,8 +66,7 @@ export default class MyTasks extends BaseComponent {
   }
 
   render() {
-    this.shadow.innerHTML = `
-    <link id="global-styles" rel="stylesheet" href="../css/style.css">
+    this.innerHTML = `
     <div class="app-content">
       <div class="app-content__title title">
         <h1>My Tasks</h1>

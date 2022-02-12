@@ -1,4 +1,4 @@
-import BaseComponent from '../../@mini-core/BaseComponent.js'
+import BaseComponent from '../@mini-core/BaseComponent.js'
 import Nav from './Nav.js'
 
 export default class Header extends BaseComponent {
@@ -11,7 +11,7 @@ export default class Header extends BaseComponent {
   }
 
   render() {
-    this.shadow.innerHTML = `
+    this.innerHTML = `
     
     <header class="box header">
       <nav-bar></nav-bar>

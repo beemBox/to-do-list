@@ -1,4 +1,4 @@
-import BaseComponent from '../../@mini-core/BaseComponent.js'
+import BaseComponent from '../@mini-core/BaseComponent.js'
 
 export default class Footer extends BaseComponent {
   constructor() {
@@ -10,7 +10,7 @@ export default class Footer extends BaseComponent {
   }
 
   render() {
-    this.shadow.innerHTML = `
+    this.innerHTML = `
     <footer class="box footer">Footer
       <a href='https://www.freepik.es/fotos/fondo'>Foto de hero creado por KamranAydinov - www.freepik.es</a>
     </footer>

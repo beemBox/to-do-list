@@ -1,9 +1,9 @@
-import BaseComponent from '../../@mini-core/BaseComponent.js'
+import BaseComponent from '../@mini-core/BaseComponent.js'
 
 export default class AppMenu extends BaseComponent {
   constructor() {
     super()
-    this.shadow.addEventListener('option-select', this.handleEvent)
+    this.addEventListener('option-select', this.handleEvent)
   }
 
   connectedCallback() {
@@ -60,7 +60,7 @@ export default class AppMenu extends BaseComponent {
   }
 
   render() {
-    this.shadow.innerHTML = /*html*/`
+    this.innerHTML = /*html*/`
     
     ${this.style}
     <section class='app-menu__section'>

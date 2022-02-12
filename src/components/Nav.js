@@ -1,5 +1,5 @@
-import BaseComponent from '../../@mini-core/BaseComponent.js'
-import Router from '../../@mini-core/Router.js'
+import BaseComponent from '../@mini-core/BaseComponent.js'
+import Router from '../@mini-core/Router.js'
 
 export default class Nav extends BaseComponent {
   constructor() {
@@ -38,8 +38,7 @@ export default class Nav extends BaseComponent {
   }
 
   render() {
-    this.shadow.innerHTML = /*html*/`
-    <link id="global-styles" rel="stylesheet" href="../css/style.css">
+    this.innerHTML = /*html*/`
     <nav>
       <a href='/'>
         <div class="logo">

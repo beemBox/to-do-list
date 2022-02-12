@@ -1,4 +1,4 @@
-import BaseComponent from '../../@mini-core/BaseComponent.js'
+import BaseComponent from '../@mini-core/BaseComponent.js'
 import UserTaskList from '../class/UserTaskList.js'
 
 export default class TasksList extends BaseComponent {
@@ -8,7 +8,7 @@ export default class TasksList extends BaseComponent {
 
   constructor() {
     super()
-    this.shadow.addEventListener('sent-new-list', this.createNewList)
+    this.addEventListener('sent-new-list', this.createNewList)
     this.retrieveLists()
   }
 
@@ -208,8 +208,7 @@ export default class TasksList extends BaseComponent {
         heading = 'Clone List'
         break
     }
-    this.shadow.innerHTML = /*html*/`
-        <link id="global-styles" rel="stylesheet" href="../css/style.css">
+    this.innerHTML = /*html*/`
         ${this.style}
         <section class='lists__section'>
           <slot name='lists__heading'>

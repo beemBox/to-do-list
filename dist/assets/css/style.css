@@ -3,18 +3,18 @@
   \****************************************************************************/
 @font-face {
   font-family: 'Exo';
-  src: url(/dist/1e42eab5aede458b89ef.ttf),
-  url(/dist/313a9b269c0d9fa9438f.ttf);
+  src: url(/dist/6b8f3ed46498f8bf2dd4.ttf),
+  url(/dist/609aaa0234675dc2ab1e.ttf);
 }
 
 @font-face {
   font-family: 'Cormorant';
-  src: url(/dist/992c95260ce56d879fdb.ttf);
+  src: url(/dist/ca200adbe182ecf64efd.ttf);
 }
 
 @font-face {
   font-family: 'Hind Gutur';
-  src: url(/dist/701488fc680377d51f19.ttf)
+  src: url(/dist/889995dbb2ca117b05ed.ttf)
 }
 
 :root {
@@ -287,3 +287,5 @@ button.app__btn--red {
 .title {
   grid-area: title
 }
+
+/*# sourceMappingURL=style.css.map*/

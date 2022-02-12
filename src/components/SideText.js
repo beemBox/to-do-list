@@ -1,4 +1,4 @@
-import BaseComponent from '../../@mini-core/BaseComponent.js'
+import BaseComponent from '../@mini-core/BaseComponent.js'
 
 export default class SideText extends BaseComponent {
   constructor() {
@@ -52,8 +52,7 @@ export default class SideText extends BaseComponent {
   }
 
   render() {
-    this.shadow.innerHTML = `
-    <link id="global-styles" rel="stylesheet" href="../css/style.css">
+    this.innerHTML = `
     <div class="sidetext">
       <p>Proyecto Final JavaScript <a href='https://www.coderhouse.com/' target='_blank'>@CoderHouse</a></p>
     </div>

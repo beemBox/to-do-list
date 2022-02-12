@@ -1,4 +1,4 @@
-import BaseComponent from '../../@mini-core/BaseComponent.js'
+import BaseComponent from '../@mini-core/BaseComponent.js'
 
 export default class Hero extends BaseComponent {
   constructor() {
@@ -76,8 +76,7 @@ export default class Hero extends BaseComponent {
   }
 
   render() {
-    this.shadow.innerHTML = `
-    <link id="global-styles" rel="stylesheet" href="../css/style.css">
+    this.innerHTML = `
     <section class="hero">
       <div class="img-container">
       </div>
