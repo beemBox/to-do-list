@@ -1,8 +1,6 @@
-import { BaseComponent } from './BaseComponent.js'
+import BaseComponent from './BaseComponent.js'
 
 export default class Router {
-  routes = {}
-
   static route(event) {
     event = event || window.event
     event.preventDefault()
@@ -21,13 +19,12 @@ export default class Router {
       }))
   }
 
+  static set Routes(routes) {
+    Router._routes = routes
+  }
+
   static get routes() {
-    return {
-      '/': '../templates/landing-page.html',
-      '/my-tasks': '../templates/my-tasks.html',
-      '/create-list': '../templates/create-list.html',
-      404: '../templates/error-404.html'
-    }
+    return Router._routes
   }
 
   static handlePartialLocation = async (tplName) => {
@@ -45,11 +42,13 @@ export default class Router {
 
   static start() {
     window.addEventListener('popstate', (e) => {
-      document.getElementsByTagName('app-lister')[0]
-        .dispatchEvent(new CustomEvent('link', {
-          bubbles: true,
-          composed: true
-        }))
+      Router.bootstrap.forEach(boot => {
+        document.getElementsByTagName(boot)[0]
+          .dispatchEvent(new CustomEvent('link', {
+            bubbles: true,
+            composed: true
+          }))
+      })
     })
   }
 }

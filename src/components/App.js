@@ -1,5 +1,5 @@
-import BaseComponent from '../@mini-core/BaseComponent.js'
-import Router from '../@mini-core/Router.js'
+import BaseComponent from '../@LittleComps/BaseComponent.js'
+import Router from '../@LittleComps/Router.js'
 
 export default class App extends BaseComponent {
   constructor() {
@@ -24,6 +24,7 @@ export default class App extends BaseComponent {
   }
 
   connectedCallback() {
+    this.setAttribute('onUpdate', false)
     this.render()
   }
 

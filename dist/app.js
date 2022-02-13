@@ -24,65 +24,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/@mini-core/App.js":
-/*!*******************************!*\
-  !*** ./src/@mini-core/App.js ***!
-  \*******************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": function() { return /* binding */ App; }
-/* harmony export */ });
-/* harmony import */ var _BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BaseComponent.js */ "./src/@mini-core/BaseComponent.js");
-/* harmony import */ var _Router_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Router.js */ "./src/@mini-core/Router.js");
-
-
-
-class App extends _BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
-  constructor() {
-    super()
-    this.content = ``
-    this.update = false
-  }
-
-  static get observedAttributes() {
-    return ['operate']
-  }
-
-  async updateSite() {
-    this.update = true
-    this.find('content-app').setAttribute('update', true)
-  }
-
-  attributeChangedCallback(prop, oldVal, newVal) {
-    if (prop === 'operate' && newVal !== '') {
-      this.updateSite()
-    }
-  }
-
-  connectedCallback() {
-    this.render()
-  }
-
-  render() {
-    this.innerHTML = `
-      <app-header></app-header>
-      <content-app update='${this.update}'></content-app>
-      <side-text></side-text>
-      <app-footer></app-footer>
-    `
-  }
-
-  createRenderRoot() {
-    return this;
-  }
-}
-
-
-/***/ }),
-
 /***/ "./src/@mini-core/BaseComponent.js":
 /*!*****************************************!*\
   !*** ./src/@mini-core/BaseComponent.js ***!
@@ -213,7 +154,7 @@ class ComponentsHandler {
     return ComponentsHandler.components
   }
 
-  static set Components(componentsList) {
+  static set ComponentsHandler(componentsList) {
     for (let comp in componentsList)
       componentsList[comp].register(comp, componentsList[comp])
 
@@ -488,6 +429,65 @@ class UserTaskList {
     this._createdDate = value
   }
 }
+
+/***/ }),
+
+/***/ "./src/components/App.js":
+/*!*******************************!*\
+  !*** ./src/components/App.js ***!
+  \*******************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ App; }
+/* harmony export */ });
+/* harmony import */ var _mini_core_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../@mini-core/BaseComponent.js */ "./src/@mini-core/BaseComponent.js");
+/* harmony import */ var _mini_core_Router_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../@mini-core/Router.js */ "./src/@mini-core/Router.js");
+
+
+
+class App extends _mini_core_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
+  constructor() {
+    super()
+    this.content = ``
+    this.update = false
+  }
+
+  static get observedAttributes() {
+    return ['operate']
+  }
+
+  async updateSite() {
+    this.update = true
+    this.find('content-app').setAttribute('update', true)
+  }
+
+  attributeChangedCallback(prop, oldVal, newVal) {
+    if (prop === 'operate' && newVal !== '') {
+      this.updateSite()
+    }
+  }
+
+  connectedCallback() {
+    this.render()
+  }
+
+  render() {
+    this.innerHTML = `
+      <app-header></app-header>
+      <content-app update='${this.update}'></content-app>
+      <side-text></side-text>
+      <app-footer></app-footer>
+    `
+  }
+
+  createRenderRoot() {
+    return this;
+  }
+}
+
 
 /***/ }),
 
@@ -1443,7 +1443,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_vendors_gsap_min_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_assets_vendors_gsap_min_js__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _mini_core_Router_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./@mini-core/Router.js */ "./src/@mini-core/Router.js");
 /* harmony import */ var _mini_core_ComponentsHandler_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./@mini-core/ComponentsHandler.js */ "./src/@mini-core/ComponentsHandler.js");
-/* harmony import */ var _mini_core_App_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./@mini-core/App.js */ "./src/@mini-core/App.js");
+/* harmony import */ var _components_App_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/App.js */ "./src/components/App.js");
 /* harmony import */ var _components_Nav_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Nav.js */ "./src/components/Nav.js");
 /* harmony import */ var _components_Header_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Header.js */ "./src/components/Header.js");
 /* harmony import */ var _components_Hero_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Hero.js */ "./src/components/Hero.js");
@@ -1453,7 +1453,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_MyTasks_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/MyTasks.js */ "./src/components/MyTasks.js");
 /* harmony import */ var _components_Footer_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/Footer.js */ "./src/components/Footer.js");
 /* harmony import */ var _components_TaskList_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/TaskList.js */ "./src/components/TaskList.js");
-/* harmony import */ var _components_AppMenu__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/AppMenu */ "./src/components/AppMenu.js");
+/* harmony import */ var _components_AppMenu_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/AppMenu.js */ "./src/components/AppMenu.js");
 
 
 
@@ -1476,7 +1476,7 @@ __webpack_require__.r(__webpack_exports__);
 const app = async () => {
   // asignamos los nombres de elementos a los componentes (para registrarlos)
   _mini_core_ComponentsHandler_js__WEBPACK_IMPORTED_MODULE_3__["default"].Components = {
-    'app-lister': _mini_core_App_js__WEBPACK_IMPORTED_MODULE_4__["default"],
+    'app-lister': _components_App_js__WEBPACK_IMPORTED_MODULE_4__["default"],
     'nav-bar': _components_Nav_js__WEBPACK_IMPORTED_MODULE_5__["default"],
     'app-header': _components_Header_js__WEBPACK_IMPORTED_MODULE_6__["default"],
     'to-do-hero': _components_Hero_js__WEBPACK_IMPORTED_MODULE_7__["default"],
@@ -1486,10 +1486,15 @@ const app = async () => {
     'app-footer': _components_Footer_js__WEBPACK_IMPORTED_MODULE_12__["default"],
     'my-tasks': _components_MyTasks_js__WEBPACK_IMPORTED_MODULE_11__["default"],
     'tasks-list': _components_TaskList_js__WEBPACK_IMPORTED_MODULE_13__["default"],
-    'app-menu': _components_AppMenu__WEBPACK_IMPORTED_MODULE_14__["default"]
+    'app-menu': _components_AppMenu_js__WEBPACK_IMPORTED_MODULE_14__["default"]
   }
 
-  _mini_core_Router_js__WEBPACK_IMPORTED_MODULE_2__["default"].start()
+  _mini_core_Router_js__WEBPACK_IMPORTED_MODULE_2__["default"].start({
+    '/': './src/templates/landing-page.html',
+    '/my-tasks': '/src/templates/my-tasks.html',
+    '/create-list': '/src/templates/create-list.html',
+    404: '/src/templates/error-404.html'
+  })
 }
 
 document.addEventListener('DOMContentLoaded', app);

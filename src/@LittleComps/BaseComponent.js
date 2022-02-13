@@ -1,5 +1,5 @@
 import Router from './Router.js'
-import ComponentsHandler from './ComponentsHandler.js'
+import { ComponentsHandler } from './Core.js'
 
 export default class BaseComponent extends HTMLElement {
   constructor() {
@@ -12,7 +12,7 @@ export default class BaseComponent extends HTMLElement {
   }
 
   async updateContent() {
-    this.content = await Router.handleLocation()
+    //this.content = await Router.handleLocation()
     this.render()
   }
 

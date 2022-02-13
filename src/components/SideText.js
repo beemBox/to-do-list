@@ -1,4 +1,4 @@
-import BaseComponent from '../@mini-core/BaseComponent.js'
+import BaseComponent from '../@LittleComps/BaseComponent.js'
 
 export default class SideText extends BaseComponent {
   constructor() {

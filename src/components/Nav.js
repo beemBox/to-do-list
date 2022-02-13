@@ -1,5 +1,5 @@
-import BaseComponent from '../@mini-core/BaseComponent.js'
-import Router from '../@mini-core/Router.js'
+import BaseComponent from '../@LittleComps/BaseComponent.js'
+import Router from '../@LittleComps/Router.js'
 
 export default class Nav extends BaseComponent {
   constructor() {
