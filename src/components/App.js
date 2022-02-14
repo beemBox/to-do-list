@@ -1,7 +1,7 @@
-import BaseComponent from '../@LittleComps/BaseComponent.js'
+import ContentApp from '../@LittleComps/ContentApp.js'
 import Router from '../@LittleComps/Router.js'
 
-export default class App extends BaseComponent {
+export default class App extends ContentApp {
   constructor() {
     super()
     this.content = ``
@@ -9,29 +9,40 @@ export default class App extends BaseComponent {
   }
 
   static get observedAttributes() {
-    return ['operate']
+    return ['onupdate']
   }
 
-  async updateSite() {
-    this.update = true
-    this.find('content-app').setAttribute('update', true)
+  async updateContent() {
+    this.content = await Router.handleLocation()
+    this.render()
+    this.setAttribute('onupdate', false)
   }
 
   attributeChangedCallback(prop, oldVal, newVal) {
-    if (prop === 'operate' && newVal !== '') {
-      this.updateSite()
+    if (prop === 'onupdate' && (newVal !== '' && newVal !== 'false')) {
+      this.updateContent()
     }
+    this.animateContentChange()
+  }
+
+  animateContentChange() {
+    let theContent = this.find('#wrapper')
+    gsap.fromTo(theContent,
+      { opacity: 0 },
+      { opacity: 1, delay: 0.35, duration: 1 })
   }
 
   connectedCallback() {
-    this.setAttribute('onUpdate', false)
+    this.setAttribute('onupdate', false)
     this.render()
   }
 
   render() {
     this.innerHTML = `
       <app-header></app-header>
-      <content-app update='${this.update}'></content-app>
+      <div id='wrapper'>
+      ${this.content}
+      </div>
       <side-text></side-text>
       <app-footer></app-footer>
     `

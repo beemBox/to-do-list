@@ -13,7 +13,7 @@ import Footer from './components/Footer.js'
 import TasksList from './components/TaskList.js'
 import AppMenu from './components/AppMenu.js'
 
-// estos imports me parece que se van a ComponentsHandler.js así no me copan todo el app.js
+// Simulando el decorator pattern, aunque básicamente hace algo similar
 $LConfig({
   components: [{
     'app-lister': App,

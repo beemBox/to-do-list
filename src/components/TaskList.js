@@ -167,7 +167,6 @@ export default class TasksList extends BaseComponent {
               <span>${list.name}</span><span>Created: ${list.createdDate}</span>
             </div>
           `}).join('')
-          debugger
         } else listItems = 'Your collection of task lists is empty.'
 
         innerContent = /*html*/`

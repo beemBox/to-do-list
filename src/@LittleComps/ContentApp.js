@@ -14,14 +14,14 @@ export default class ContentApp extends BaseComponent {
   }
 
   async updateContent() {
-    this.content = await Router.handleLocation()
+    // this.content = await Router.handleLocation()
     this.render()
     this.setAttribute('update', false)
   }
 
   attributeChangedCallback(prop, oldVal, newVal) {
     if (prop === 'update' && (newVal === 'true')) {
-      this.updateContent()
+      // this.updateContent()
     }
     this.animateContentChange()
   }

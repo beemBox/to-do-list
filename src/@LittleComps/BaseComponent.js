@@ -8,7 +8,7 @@ export default class BaseComponent extends HTMLElement {
   }
 
   static register(elementName, component) {
-    customElements.define(elementName, this)
+    return customElements.define(elementName, this)
   }
 
   async updateContent() {

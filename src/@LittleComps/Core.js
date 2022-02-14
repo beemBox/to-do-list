@@ -26,29 +26,18 @@ export let $LConfig = function () {
   if (typeof config !== 'object')
     throw Error('Debe ingresar parámentros de configuración.')
   else {
-    for (let key in config) {
-      switch (key) {
-        case 'components':
-          ComponentsHandler.Components = config[key][0]
-          break
-        case 'bootstrap':
-          ComponentsHandler.Bootstrap = config[key]
-          break
-        case 'routes':
-          Router.Routes = config[key]
-        default:
-      }
-      const init = async () => {
-        Router.start()
-      }
+    Router.Routes = config.routes
+    ComponentsHandler.Components = config.components[0]
+    ComponentsHandler.Bootstrap = config.bootstrap
 
-      const setDom = () => {
-        document.addEventListener('DOMContentLoaded', init);
-        document.addEventListener('link', e => {
-          e.target.setAttribute('operate', 'link')
-          Router.handleLocation()
-        })
-      }
+    const init = async () => {
+      Router.start()
     }
+    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('link', e => {
+      e.target.setAttribute('onupdate', 'link')
+      Router.handleLocation()
+    })
+
   }
 }
