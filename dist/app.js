@@ -24,10 +24,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/@mini-core/BaseComponent.js":
-/*!*****************************************!*\
-  !*** ./src/@mini-core/BaseComponent.js ***!
-  \*****************************************/
+/***/ "./src/@LittleComps/BaseComponent.js":
+/*!*******************************************!*\
+  !*** ./src/@LittleComps/BaseComponent.js ***!
+  \*******************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -35,8 +35,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ BaseComponent; }
 /* harmony export */ });
-/* harmony import */ var _Router_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Router.js */ "./src/@mini-core/Router.js");
-/* harmony import */ var _ComponentsHandler_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ComponentsHandler.js */ "./src/@mini-core/ComponentsHandler.js");
+/* harmony import */ var _Router_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Router.js */ "./src/@LittleComps/Router.js");
+/* harmony import */ var _Core_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Core.js */ "./src/@LittleComps/Core.js");
 
 
 
@@ -47,11 +47,11 @@ class BaseComponent extends HTMLElement {
   }
 
   static register(elementName, component) {
-    customElements.define(elementName, this)
+    return customElements.define(elementName, this)
   }
 
   async updateContent() {
-    this.content = await _Router_js__WEBPACK_IMPORTED_MODULE_0__["default"].handleLocation()
+    //this.content = await Router.handleLocation()
     this.render()
   }
 
@@ -131,145 +131,85 @@ class BaseComponent extends HTMLElement {
     }
   }
 
-  findAll = selector => this.querySelectorAll(selector)
-  find = selector => this.querySelector(selector)
+  findAll = selector => document.querySelectorAll(selector)
+  find = selector => document.querySelector(selector)
 }
 
 /***/ }),
 
-/***/ "./src/@mini-core/ComponentsHandler.js":
-/*!*********************************************!*\
-  !*** ./src/@mini-core/ComponentsHandler.js ***!
-  \*********************************************/
+/***/ "./src/@LittleComps/Core.js":
+/*!**********************************!*\
+  !*** ./src/@LittleComps/Core.js ***!
+  \**********************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": function() { return /* binding */ ComponentsHandler; }
+/* harmony export */   "ComponentsHandler": function() { return /* binding */ ComponentsHandler; },
+/* harmony export */   "$LConfig": function() { return /* binding */ $LConfig; }
 /* harmony export */ });
+/* harmony import */ var _Router_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Router.js */ "./src/@LittleComps/Router.js");
+
+/**
+ * Clase que almacena en cache los componentes para que sean usados desde otros componentes internos
+ */
 class ComponentsHandler {
-  static components = {}
   static get Components() {
     return ComponentsHandler.components
   }
 
-  static set ComponentsHandler(componentsList) {
+  static set Components(componentsList) {
     for (let comp in componentsList)
       componentsList[comp].register(comp, componentsList[comp])
 
     ComponentsHandler.components = componentsList
   }
+
+  static set Bootstrap(bootstrap) {
+    ComponentsHandler.bootstrap = bootstrap
+  }
 }
+/**
+ * Inicia la configuración de los componentes
+ */
+let $LConfig = function () {
+  let config = Array.prototype.slice.call(arguments)[0]
+  if (typeof config !== 'object')
+    throw Error('Debe ingresar parámentros de configuración.')
+  else {
+    _Router_js__WEBPACK_IMPORTED_MODULE_0__["default"].Routes = config.routes
+    ComponentsHandler.Components = config.components[0]
+    ComponentsHandler.Bootstrap = config.bootstrap
 
-/***/ }),
-
-/***/ "./src/@mini-core/ContentApp.js":
-/*!**************************************!*\
-  !*** ./src/@mini-core/ContentApp.js ***!
-  \**************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": function() { return /* binding */ ContentApp; }
-/* harmony export */ });
-/* harmony import */ var _BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BaseComponent.js */ "./src/@mini-core/BaseComponent.js");
-/* harmony import */ var _Router_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Router.js */ "./src/@mini-core/Router.js");
-
-
-
-class ContentApp extends _BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
-  constructor() {
-    super()
-    this.content = ''
-    this.addEventListener('option-select', this.handleEvent)
-  }
-
-
-  static get observedAttributes() {
-    return ['update']
-  }
-
-  async updateContent() {
-    this.content = await _Router_js__WEBPACK_IMPORTED_MODULE_1__["default"].handleLocation()
-    this.render()
-    this.setAttribute('update', false)
-  }
-
-  attributeChangedCallback(prop, oldVal, newVal) {
-    if (prop === 'update' && (newVal === 'true')) {
-      this.updateContent()
+    const init = async () => {
+      _Router_js__WEBPACK_IMPORTED_MODULE_0__["default"].start()
     }
-    this.animateContentChange()
-  }
-
-  animateNewContent() {
-
-  }
-
-  animateContentChange() {
-    let theContent = this.find('#the-content')
-    gsap.fromTo(theContent,
-      { opacity: 0 },
-      { opacity: 1, delay: 0.35, duration: 1 })
-  }
-
-  connectedCallback() {
-    this.updateContent()
-    this.setChildrenComponentsObserver()
-  }
-
-  setChildrenComponentsObserver() {
-    this.observer = new MutationObserver(this.childrenMutation)
-    this.observer.observe(this, {
-      attributes: true,
-      childList: true,
-      subtree: true
+    document.addEventListener('DOMContentLoaded', init);
+    createBootstrap()
+    document.addEventListener('link', e => {
+      e.target.setAttribute('onupdate', 'link')
+      _Router_js__WEBPACK_IMPORTED_MODULE_0__["default"].handleLocation()
     })
+
   }
+}
 
-  childrenMutation(mutations) {
-    const added = []
-
-    for (const mutation of mutations)
-      added.push(...mutation.addedNodes)
-
-    // console.log({ added: added.filter(el => el.nodeType === Node.ELEMENT_NODE) })
-    // console.log(added)
-  }
-
-  unsetChildrenComponentsObserver() {
-    this.observer.disconnect()
-  }
-
-  connectedCallback() {
-    this.setChildrenComponentsObserver()
-    this.updateContent()
-  }
-
-  disconnectedCallback() {
-    this.unsetChildrenComponentsObserver()
-  }
-
-
-  render() {
-    this.innerHTML = `
-      
-      <div id='the-content'>
-      ${this.content}
-      </div>
-      `
-  }
+const createBootstrap = () => {
+  document.querySelector('body')
+    .appendChild(
+      document.createElement(
+        _Router_js__WEBPACK_IMPORTED_MODULE_0__["default"].bootstrapName
+      )
+    )
 }
 
 /***/ }),
 
-/***/ "./src/@mini-core/Router.js":
-/*!**********************************!*\
-  !*** ./src/@mini-core/Router.js ***!
-  \**********************************/
+/***/ "./src/@LittleComps/Router.js":
+/*!************************************!*\
+  !*** ./src/@LittleComps/Router.js ***!
+  \************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -277,41 +217,55 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ Router; }
 /* harmony export */ });
-/* harmony import */ var _BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BaseComponent.js */ "./src/@mini-core/BaseComponent.js");
+/* harmony import */ var _Core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Core.js */ "./src/@LittleComps/Core.js");
+/* harmony import */ var _BaseComponent_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BaseComponent.js */ "./src/@LittleComps/BaseComponent.js");
+
 
 
 class Router {
-  routes = {}
-
   static route(event) {
     event = event || window.event
     event.preventDefault()
 
-    if (event.target.nodeName === 'BUTTON')
+    if (event.target.localName === 'button')
       event.target.href = event.target.getAttribute('Link')
     // event.target.href lo devolvía como undefined
     window.history.pushState({}, '', (event.target.href || '/'))
 
-    // tengo que hacer genérica esta parte porque tiene el 
-    // nombre de la app to-do-list... que es horrible encima jaja
-    document.getElementsByTagName('app-lister')[0]
-      .dispatchEvent(new CustomEvent('link', {
-        bubbles: true,
-        composed: true
-      }))
+    // tomamos el elemento del bootstrap para despachar evento link
+    const el = event.path.filter(el => {
+      const comp = Router.bootstrapName
+      return comp === el.localName
+    })[0]
+
+    el.dispatchEvent(new CustomEvent('link', {
+      bubbles: true,
+      composed: true
+    }))
+  }
+
+  static get bootstrapName() {
+    return Object.keys(_Core_js__WEBPACK_IMPORTED_MODULE_0__.ComponentsHandler.components).find(comp => {
+      const def = _Core_js__WEBPACK_IMPORTED_MODULE_0__.ComponentsHandler.components[comp]
+      if (_Core_js__WEBPACK_IMPORTED_MODULE_0__.ComponentsHandler.bootstrap.some(boot => (boot === def)))
+        return comp
+    })
+  }
+
+  static set Routes(routes) {
+    Router._routes = routes
+  }
+
+  static get routeComponent() {
+    return Router.routes[window.location.pathname]
   }
 
   static get routes() {
-    return {
-      '/': '../templates/landing-page.html',
-      '/my-tasks': '../templates/my-tasks.html',
-      '/create-list': '../templates/create-list.html',
-      404: '../templates/error-404.html'
-    }
+    return Router._routes
   }
 
   static handlePartialLocation = async (tplName) => {
-    const path = `../templates/${tplName}.html`
+    const path = `src/templates/${tplName}.html`
     const html = await fetch(path).then(data => data.text())
     return html
   }
@@ -319,20 +273,27 @@ class Router {
   static handleLocation = async () => {
     const path = window.location.pathname
     const route = Router.routes[path] || Router.routes[404]
-    const html = await fetch(route).then(data => data.text())
+    const html = await fetch(`src/templates/${route}.html`)
+      .then(data => data.text())
     return html
   }
 
   static start() {
+    const main = document.getElementsByTagName(Router.bootstrapName)[0]
+    main.setAttribute('onupdate', true)
     window.addEventListener('popstate', (e) => {
-      document.getElementsByTagName('app-lister')[0]
-        .dispatchEvent(new CustomEvent('link', {
-          bubbles: true,
-          composed: true
-        }))
+      Router.bootstrap.forEach(boot => {
+        debugger
+        document.getElementsByTagName(boot)[0]
+          .dispatchEvent(new CustomEvent('link', {
+            bubbles: true,
+            composed: true
+          }))
+      })
     })
   }
 }
+
 
 /***/ }),
 
@@ -443,12 +404,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ App; }
 /* harmony export */ });
-/* harmony import */ var _mini_core_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../@mini-core/BaseComponent.js */ "./src/@mini-core/BaseComponent.js");
-/* harmony import */ var _mini_core_Router_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../@mini-core/Router.js */ "./src/@mini-core/Router.js");
+/* harmony import */ var _ToDoListContent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ToDoListContent.js */ "./src/components/ToDoListContent.js");
+/* harmony import */ var _LittleComps_Router_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../@LittleComps/Router.js */ "./src/@LittleComps/Router.js");
 
 
 
-class App extends _mini_core_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
+class App extends _ToDoListContent_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
   constructor() {
     super()
     this.content = ``
@@ -456,28 +417,29 @@ class App extends _mini_core_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__["defa
   }
 
   static get observedAttributes() {
-    return ['operate']
-  }
-
-  async updateSite() {
-    this.update = true
-    this.find('content-app').setAttribute('update', true)
+    return ['onupdate']
   }
 
   attributeChangedCallback(prop, oldVal, newVal) {
-    if (prop === 'operate' && newVal !== '') {
-      this.updateSite()
+    if (prop === 'onupdate' && (newVal !== '' && newVal !== 'false')) {
+      this.updateContent()
+      this.setAttribute('onupdate', false)
     }
   }
 
+  updateContent() {
+    this.find('to-do-list-content').setAttribute('update', true)
+  }
+
   connectedCallback() {
+    this.setAttribute('onupdate', false)
     this.render()
   }
 
   render() {
     this.innerHTML = `
       <app-header></app-header>
-      <content-app update='${this.update}'></content-app>
+      <to-do-list-content update='${this.update}'></to-do-list-content>
       <side-text></side-text>
       <app-footer></app-footer>
     `
@@ -502,10 +464,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ AppMenu; }
 /* harmony export */ });
-/* harmony import */ var _mini_core_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../@mini-core/BaseComponent.js */ "./src/@mini-core/BaseComponent.js");
+/* harmony import */ var _LittleComps_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../@LittleComps/BaseComponent.js */ "./src/@LittleComps/BaseComponent.js");
 
 
-class AppMenu extends _mini_core_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
+class AppMenu extends _LittleComps_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
   constructor() {
     super()
     this.addEventListener('option-select', this.handleEvent)
@@ -595,10 +557,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ Footer; }
 /* harmony export */ });
-/* harmony import */ var _mini_core_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../@mini-core/BaseComponent.js */ "./src/@mini-core/BaseComponent.js");
+/* harmony import */ var _LittleComps_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../@LittleComps/BaseComponent.js */ "./src/@LittleComps/BaseComponent.js");
 
 
-class Footer extends _mini_core_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
+class Footer extends _LittleComps_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
   constructor() {
     super()
   }
@@ -629,12 +591,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ Header; }
 /* harmony export */ });
-/* harmony import */ var _mini_core_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../@mini-core/BaseComponent.js */ "./src/@mini-core/BaseComponent.js");
+/* harmony import */ var _LittleComps_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../@LittleComps/BaseComponent.js */ "./src/@LittleComps/BaseComponent.js");
 /* harmony import */ var _Nav_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Nav.js */ "./src/components/Nav.js");
 
 
 
-class Header extends _mini_core_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
+class Header extends _LittleComps_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
   constructor() {
     super()
   }
@@ -666,10 +628,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ Hero; }
 /* harmony export */ });
-/* harmony import */ var _mini_core_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../@mini-core/BaseComponent.js */ "./src/@mini-core/BaseComponent.js");
+/* harmony import */ var _LittleComps_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../@LittleComps/BaseComponent.js */ "./src/@LittleComps/BaseComponent.js");
 
 
-class Hero extends _mini_core_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
+class Hero extends _LittleComps_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
   constructor() {
     super()
   }
@@ -739,7 +701,7 @@ class Hero extends _mini_core_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__["def
   }
 
   animateContentChange() {
-    let theContent = this.find('#the-content')
+    let theContent = this.find('#wrapper')
     gsap.to(theContent,
       { opacity: 0, duration: 1, delay: 0.35 })
   }
@@ -772,38 +734,6 @@ class Hero extends _mini_core_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__["def
 
 /***/ }),
 
-/***/ "./src/components/LandingPage.js":
-/*!***************************************!*\
-  !*** ./src/components/LandingPage.js ***!
-  \***************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": function() { return /* binding */ LandingPage; }
-/* harmony export */ });
-/* harmony import */ var _mini_core_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../@mini-core/BaseComponent.js */ "./src/@mini-core/BaseComponent.js");
-
-
-class LandingPage extends _mini_core_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
-  constructor() {
-    super()
-  }
-
-  connectedCallback() {
-    this.updateContent()
-  }
-
-
-  render() {
-    this.innerHTML = this.content
-  }
-}
-
-
-/***/ }),
-
 /***/ "./src/components/MyTasks.js":
 /*!***********************************!*\
   !*** ./src/components/MyTasks.js ***!
@@ -815,9 +745,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ MyTasks; }
 /* harmony export */ });
-/* harmony import */ var _mini_core_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../@mini-core/BaseComponent.js */ "./src/@mini-core/BaseComponent.js");
+/* harmony import */ var _LittleComps_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../@LittleComps/BaseComponent.js */ "./src/@LittleComps/BaseComponent.js");
 /* harmony import */ var _Task_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Task.js */ "./src/components/Task.js");
-/* harmony import */ var _mini_core_Router_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../@mini-core/Router.js */ "./src/@mini-core/Router.js");
+/* harmony import */ var _LittleComps_Router_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../@LittleComps/Router.js */ "./src/@LittleComps/Router.js");
 
 
 
@@ -828,7 +758,7 @@ __webpack_require__.r(__webpack_exports__);
 // pero más adelante la idea es usar firebase.
 // voy a tener que hacer una clase que sea como un repository para handlear data
 // del gateway y services así como de localStorage
-class MyTasks extends _mini_core_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
+class MyTasks extends _LittleComps_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
   _tasksList = []
 
   constructor() {
@@ -915,12 +845,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ Nav; }
 /* harmony export */ });
-/* harmony import */ var _mini_core_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../@mini-core/BaseComponent.js */ "./src/@mini-core/BaseComponent.js");
-/* harmony import */ var _mini_core_Router_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../@mini-core/Router.js */ "./src/@mini-core/Router.js");
+/* harmony import */ var _LittleComps_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../@LittleComps/BaseComponent.js */ "./src/@LittleComps/BaseComponent.js");
+/* harmony import */ var _LittleComps_Router_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../@LittleComps/Router.js */ "./src/@LittleComps/Router.js");
 
 
 
-class Nav extends _mini_core_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
+class Nav extends _LittleComps_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
   constructor() {
     super()
   }
@@ -946,12 +876,12 @@ class Nav extends _mini_core_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__["defa
   }
 
   animateContentChange() {
-    let theContent = this.find('#the-content')
+    let theContent = this.find('#wrapper')
     gsap.to(theContent,
       {
         opacity: 0,
-        duration: 5,
-        delay: 0.0,
+        duration: 1,
+        delay: 0.35,
       }
     )
   }
@@ -986,10 +916,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ SideText; }
 /* harmony export */ });
-/* harmony import */ var _mini_core_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../@mini-core/BaseComponent.js */ "./src/@mini-core/BaseComponent.js");
+/* harmony import */ var _LittleComps_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../@LittleComps/BaseComponent.js */ "./src/@LittleComps/BaseComponent.js");
 
 
-class SideText extends _mini_core_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
+class SideText extends _LittleComps_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
   constructor() {
     super()
   }
@@ -1062,12 +992,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ Task; }
 /* harmony export */ });
-/* harmony import */ var _mini_core_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../@mini-core/BaseComponent.js */ "./src/@mini-core/BaseComponent.js");
+/* harmony import */ var _LittleComps_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../@LittleComps/BaseComponent.js */ "./src/@LittleComps/BaseComponent.js");
 /* harmony import */ var _templates_task_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../templates/task.js */ "./src/templates/task.js");
 
 
 
-class Task extends _mini_core_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
+class Task extends _LittleComps_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
   constructor(taskName, dateTask, created, modified) {
     this._taskName = taskName
     this._status = 0
@@ -1107,12 +1037,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ TasksList; }
 /* harmony export */ });
-/* harmony import */ var _mini_core_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../@mini-core/BaseComponent.js */ "./src/@mini-core/BaseComponent.js");
+/* harmony import */ var _LittleComps_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../@LittleComps/BaseComponent.js */ "./src/@LittleComps/BaseComponent.js");
 /* harmony import */ var _class_UserTaskList_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../class/UserTaskList.js */ "./src/class/UserTaskList.js");
 
 
 
-class TasksList extends _mini_core_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
+class TasksList extends _LittleComps_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
   _taskLists = []
   newListName = ''
   newListObs = ''
@@ -1278,7 +1208,6 @@ class TasksList extends _mini_core_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__
               <span>${list.name}</span><span>Created: ${list.createdDate}</span>
             </div>
           `}).join('')
-          debugger
         } else listItems = 'Your collection of task lists is empty.'
 
         innerContent = /*html*/`
@@ -1334,6 +1263,107 @@ class TasksList extends _mini_core_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__
 
 /***/ }),
 
+/***/ "./src/components/ToDoListContent.js":
+/*!*******************************************!*\
+  !*** ./src/components/ToDoListContent.js ***!
+  \*******************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ ToDoListContent; }
+/* harmony export */ });
+/* harmony import */ var _LittleComps_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../@LittleComps/BaseComponent.js */ "./src/@LittleComps/BaseComponent.js");
+/* harmony import */ var _LittleComps_Router_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../@LittleComps/Router.js */ "./src/@LittleComps/Router.js");
+
+
+
+class ToDoListContent extends _LittleComps_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
+  constructor() {
+    super()
+    this.content = ''
+    this.addEventListener('option-select', this.handleEvent)
+  }
+
+
+  static get observedAttributes() {
+    return ['update']
+  }
+
+  async updateContent() {
+    this.content = await _LittleComps_Router_js__WEBPACK_IMPORTED_MODULE_1__["default"].handleLocation()
+    this.render()
+    this.setAttribute('update', false)
+  }
+
+  attributeChangedCallback(prop, oldVal, newVal) {
+    if (prop === 'update' && (newVal === 'true')) {
+      this.updateContent()
+    }
+    this.animateContentChange()
+  }
+
+  animateNewContent() {
+
+  }
+
+  animateContentChange() {
+    let theContent = this.find('#wrapper')
+    gsap.fromTo(theContent,
+      { opacity: 0 },
+      { opacity: 1, delay: 0.35, duration: 1 })
+  }
+
+  connectedCallback() {
+    this.updateContent()
+    this.setChildrenComponentsObserver()
+  }
+
+  setChildrenComponentsObserver() {
+    this.observer = new MutationObserver(this.childrenMutation)
+    this.observer.observe(this, {
+      attributes: true,
+      childList: true,
+      subtree: true
+    })
+  }
+
+  childrenMutation(mutations) {
+    const added = []
+
+    for (const mutation of mutations)
+      added.push(...mutation.addedNodes)
+
+    // console.log({ added: added.filter(el => el.nodeType === Node.ELEMENT_NODE) })
+    // console.log(added)
+  }
+
+  unsetChildrenComponentsObserver() {
+    this.observer.disconnect()
+  }
+
+  connectedCallback() {
+    this.setChildrenComponentsObserver()
+    this.updateContent()
+  }
+
+  disconnectedCallback() {
+    this.unsetChildrenComponentsObserver()
+  }
+
+
+  render() {
+    this.innerHTML = `
+      <div id='wrapper'>
+      ${this.content}
+      </div>
+      `
+  }
+}
+
+/***/ }),
+
 /***/ "./src/templates/task.js":
 /*!*******************************!*\
   !*** ./src/templates/task.js ***!
@@ -1343,9 +1373,9 @@ class TasksList extends _mini_core_BaseComponent_js__WEBPACK_IMPORTED_MODULE_0__
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "template": function() { return /* binding */ template; }
+/* harmony export */   "default": function() { return __WEBPACK_DEFAULT_EXPORT__; }
 /* harmony export */ });
-const template = {
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   get task() {
     const taskTpl = document.createElement('template')
     taskTpl = `
@@ -1358,7 +1388,7 @@ const template = {
     `
     return taskTpl
   }
-}
+});
 
 /***/ })
 
@@ -1441,19 +1471,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_css_style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./assets/css/style.css */ "./src/assets/css/style.css");
 /* harmony import */ var _assets_vendors_gsap_min_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./assets/vendors/gsap.min.js */ "./src/assets/vendors/gsap.min.js");
 /* harmony import */ var _assets_vendors_gsap_min_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_assets_vendors_gsap_min_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _mini_core_Router_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./@mini-core/Router.js */ "./src/@mini-core/Router.js");
-/* harmony import */ var _mini_core_ComponentsHandler_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./@mini-core/ComponentsHandler.js */ "./src/@mini-core/ComponentsHandler.js");
-/* harmony import */ var _components_App_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/App.js */ "./src/components/App.js");
-/* harmony import */ var _components_Nav_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Nav.js */ "./src/components/Nav.js");
-/* harmony import */ var _components_Header_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Header.js */ "./src/components/Header.js");
-/* harmony import */ var _components_Hero_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Hero.js */ "./src/components/Hero.js");
-/* harmony import */ var _components_SideText_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/SideText.js */ "./src/components/SideText.js");
-/* harmony import */ var _components_LandingPage_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/LandingPage.js */ "./src/components/LandingPage.js");
-/* harmony import */ var _mini_core_ContentApp_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./@mini-core/ContentApp.js */ "./src/@mini-core/ContentApp.js");
-/* harmony import */ var _components_MyTasks_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/MyTasks.js */ "./src/components/MyTasks.js");
-/* harmony import */ var _components_Footer_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/Footer.js */ "./src/components/Footer.js");
-/* harmony import */ var _components_TaskList_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/TaskList.js */ "./src/components/TaskList.js");
-/* harmony import */ var _components_AppMenu_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/AppMenu.js */ "./src/components/AppMenu.js");
+/* harmony import */ var _LittleComps_Core_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./@LittleComps/Core.js */ "./src/@LittleComps/Core.js");
+/* harmony import */ var _components_App_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/App.js */ "./src/components/App.js");
+/* harmony import */ var _components_Nav_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Nav.js */ "./src/components/Nav.js");
+/* harmony import */ var _components_Header_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Header.js */ "./src/components/Header.js");
+/* harmony import */ var _components_Hero_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Hero.js */ "./src/components/Hero.js");
+/* harmony import */ var _components_SideText_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/SideText.js */ "./src/components/SideText.js");
+/* harmony import */ var _components_ToDoListContent_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/ToDoListContent.js */ "./src/components/ToDoListContent.js");
+/* harmony import */ var _components_MyTasks_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/MyTasks.js */ "./src/components/MyTasks.js");
+/* harmony import */ var _components_Footer_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/Footer.js */ "./src/components/Footer.js");
+/* harmony import */ var _components_TaskList_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/TaskList.js */ "./src/components/TaskList.js");
+/* harmony import */ var _components_AppMenu_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/AppMenu.js */ "./src/components/AppMenu.js");
 
 
 
@@ -1469,39 +1497,30 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-// estos imports me parece que se van a ComponentsHandler.js así no me copan todo el app.js
-
-const app = async () => {
-  // asignamos los nombres de elementos a los componentes (para registrarlos)
-  _mini_core_ComponentsHandler_js__WEBPACK_IMPORTED_MODULE_3__["default"].Components = {
-    'app-lister': _components_App_js__WEBPACK_IMPORTED_MODULE_4__["default"],
-    'nav-bar': _components_Nav_js__WEBPACK_IMPORTED_MODULE_5__["default"],
-    'app-header': _components_Header_js__WEBPACK_IMPORTED_MODULE_6__["default"],
-    'to-do-hero': _components_Hero_js__WEBPACK_IMPORTED_MODULE_7__["default"],
-    'side-text': _components_SideText_js__WEBPACK_IMPORTED_MODULE_8__["default"],
-    'content-app': _mini_core_ContentApp_js__WEBPACK_IMPORTED_MODULE_10__["default"],
-    'landing-page': _components_LandingPage_js__WEBPACK_IMPORTED_MODULE_9__["default"],
-    'app-footer': _components_Footer_js__WEBPACK_IMPORTED_MODULE_12__["default"],
-    'my-tasks': _components_MyTasks_js__WEBPACK_IMPORTED_MODULE_11__["default"],
-    'tasks-list': _components_TaskList_js__WEBPACK_IMPORTED_MODULE_13__["default"],
-    'app-menu': _components_AppMenu_js__WEBPACK_IMPORTED_MODULE_14__["default"]
+// Simulando el decorator pattern, aunque básicamente hace algo similar
+(0,_LittleComps_Core_js__WEBPACK_IMPORTED_MODULE_2__.$LConfig)({
+  components: [{
+    'jotter-app': _components_App_js__WEBPACK_IMPORTED_MODULE_3__["default"],
+    'nav-bar': _components_Nav_js__WEBPACK_IMPORTED_MODULE_4__["default"],
+    'app-header': _components_Header_js__WEBPACK_IMPORTED_MODULE_5__["default"],
+    'to-do-hero': _components_Hero_js__WEBPACK_IMPORTED_MODULE_6__["default"],
+    'side-text': _components_SideText_js__WEBPACK_IMPORTED_MODULE_7__["default"],
+    'to-do-list-content': _components_ToDoListContent_js__WEBPACK_IMPORTED_MODULE_8__["default"],
+    'app-footer': _components_Footer_js__WEBPACK_IMPORTED_MODULE_10__["default"],
+    'my-tasks': _components_MyTasks_js__WEBPACK_IMPORTED_MODULE_9__["default"],
+    'tasks-list': _components_TaskList_js__WEBPACK_IMPORTED_MODULE_11__["default"],
+    'app-menu': _components_AppMenu_js__WEBPACK_IMPORTED_MODULE_12__["default"]
+  }],
+  bootstrap: [_components_App_js__WEBPACK_IMPORTED_MODULE_3__["default"]],
+  routes: {
+    '/': 'landing-page',
+    '/my-tasks': 'my-tasks',
+    '/create-list': 'create-list'
+    // 404: '/src/templates/error-404.html'
   }
-
-  _mini_core_Router_js__WEBPACK_IMPORTED_MODULE_2__["default"].start({
-    '/': './src/templates/landing-page.html',
-    '/my-tasks': '/src/templates/my-tasks.html',
-    '/create-list': '/src/templates/create-list.html',
-    404: '/src/templates/error-404.html'
-  })
-}
-
-document.addEventListener('DOMContentLoaded', app);
-document.addEventListener('link', e => {
-  e.target.setAttribute('operate', 'link')
-  _mini_core_Router_js__WEBPACK_IMPORTED_MODULE_2__["default"].handleLocation()
 })
+
+
 }();
 /******/ 	return __webpack_exports__;
 /******/ })()
