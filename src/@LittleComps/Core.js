@@ -34,10 +34,20 @@ export let $LConfig = function () {
       Router.start()
     }
     document.addEventListener('DOMContentLoaded', init);
+    createBootstrap()
     document.addEventListener('link', e => {
       e.target.setAttribute('onupdate', 'link')
       Router.handleLocation()
     })
 
   }
+}
+
+const createBootstrap = () => {
+  document.querySelector('body')
+    .appendChild(
+      document.createElement(
+        Router.bootstrapName
+      )
+    )
 }

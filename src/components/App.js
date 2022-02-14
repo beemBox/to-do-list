@@ -1,4 +1,4 @@
-import ContentApp from '../@LittleComps/ContentApp.js'
+import ContentApp from './ToDoListContent.js'
 import Router from '../@LittleComps/Router.js'
 
 export default class App extends ContentApp {
@@ -12,24 +12,15 @@ export default class App extends ContentApp {
     return ['onupdate']
   }
 
-  async updateContent() {
-    this.content = await Router.handleLocation()
-    this.render()
-    this.setAttribute('onupdate', false)
-  }
-
   attributeChangedCallback(prop, oldVal, newVal) {
     if (prop === 'onupdate' && (newVal !== '' && newVal !== 'false')) {
       this.updateContent()
+      this.setAttribute('onupdate', false)
     }
-    this.animateContentChange()
   }
 
-  animateContentChange() {
-    let theContent = this.find('#wrapper')
-    gsap.fromTo(theContent,
-      { opacity: 0 },
-      { opacity: 1, delay: 0.35, duration: 1 })
+  updateContent() {
+    this.find('to-do-list-content').setAttribute('update', true)
   }
 
   connectedCallback() {
@@ -40,9 +31,7 @@ export default class App extends ContentApp {
   render() {
     this.innerHTML = `
       <app-header></app-header>
-      <div id='wrapper'>
-      ${this.content}
-      </div>
+      <to-do-list-content update='${this.update}'></to-do-list-content>
       <side-text></side-text>
       <app-footer></app-footer>
     `

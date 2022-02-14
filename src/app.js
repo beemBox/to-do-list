@@ -7,7 +7,7 @@ import Nav from './components/Nav.js'
 import Header from './components/Header.js'
 import Hero from './components/Hero.js'
 import SideText from './components/SideText.js'
-import LandingPage from './components/LandingPage.js'
+import ToDoListContent from './components/ToDoListContent.js'
 import MyTasks from './components/MyTasks.js'
 import Footer from './components/Footer.js'
 import TasksList from './components/TaskList.js'
@@ -16,12 +16,12 @@ import AppMenu from './components/AppMenu.js'
 // Simulando el decorator pattern, aunque básicamente hace algo similar
 $LConfig({
   components: [{
-    'app-lister': App,
+    'jotter-app': App,
     'nav-bar': Nav,
     'app-header': Header,
     'to-do-hero': Hero,
     'side-text': SideText,
-    'landing-page': LandingPage,
+    'to-do-list-content': ToDoListContent,
     'app-footer': Footer,
     'my-tasks': MyTasks,
     'tasks-list': TasksList,

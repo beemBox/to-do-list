@@ -27,12 +27,12 @@ export default class Nav extends BaseComponent {
   }
 
   animateContentChange() {
-    let theContent = this.find('#the-content')
+    let theContent = this.find('#wrapper')
     gsap.to(theContent,
       {
         opacity: 0,
-        duration: 5,
-        delay: 0.0,
+        duration: 1,
+        delay: 0.35,
       }
     )
   }

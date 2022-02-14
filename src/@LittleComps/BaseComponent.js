@@ -92,6 +92,6 @@ export default class BaseComponent extends HTMLElement {
     }
   }
 
-  findAll = selector => this.querySelectorAll(selector)
-  find = selector => this.querySelector(selector)
+  findAll = selector => document.querySelectorAll(selector)
+  find = selector => document.querySelector(selector)
 }

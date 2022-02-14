@@ -1,7 +1,7 @@
-import BaseComponent from './BaseComponent.js'
-import Router from './Router.js'
+import BaseComponent from '../@LittleComps/BaseComponent.js'
+import Router from '../@LittleComps/Router.js'
 
-export default class ContentApp extends BaseComponent {
+export default class ToDoListContent extends BaseComponent {
   constructor() {
     super()
     this.content = ''
@@ -14,14 +14,14 @@ export default class ContentApp extends BaseComponent {
   }
 
   async updateContent() {
-    // this.content = await Router.handleLocation()
+    this.content = await Router.handleLocation()
     this.render()
     this.setAttribute('update', false)
   }
 
   attributeChangedCallback(prop, oldVal, newVal) {
     if (prop === 'update' && (newVal === 'true')) {
-      // this.updateContent()
+      this.updateContent()
     }
     this.animateContentChange()
   }
@@ -31,7 +31,7 @@ export default class ContentApp extends BaseComponent {
   }
 
   animateContentChange() {
-    let theContent = this.find('#the-content')
+    let theContent = this.find('#wrapper')
     gsap.fromTo(theContent,
       { opacity: 0 },
       { opacity: 1, delay: 0.35, duration: 1 })
@@ -77,8 +77,7 @@ export default class ContentApp extends BaseComponent {
 
   render() {
     this.innerHTML = `
-      
-      <div id='the-content'>
+      <div id='wrapper'>
       ${this.content}
       </div>
       `
