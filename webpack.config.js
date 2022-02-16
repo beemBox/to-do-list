@@ -51,19 +51,26 @@ module.exports = {
         use: [{
           loader: MiniCssExtractPlugin.loader,
           options: {}
-        }, 'css-loader'],
+        }],
         exclude: /node_modules/
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: 'asset/resource',
-        use: [{
-          loader: 'file-loader',
-          options: {
-            name: '[name].[ext]',
-            outputPath: 'assets/img/'
-          }
-        }]
+        type: 'javascript/auto',
+        loader: 'file-loader',
+        type: 'javascript/auto',
+        options: {
+          name: '/assets/img/[name][ext]'
+        }
+      },
+      {
+        test: /\.(ttf)$/i,
+        type: 'javascript/auto',
+        loader: 'file-loader',
+        type: 'javascript/auto',
+        options: {
+          name: '/assets/fonts/[name][ext]'
+        }
       }
     ],
   },
@@ -72,9 +79,6 @@ module.exports = {
       template: 'index.html',
       inject: 'body',
       title: title
-    }),
-    new MiniCssExtractPlugin({
-      filename: 'assets/css/style.css'
     }),
     new CopyPlugin({
       patterns: [
@@ -89,7 +93,8 @@ module.exports = {
   mode: 'development',
   devtool: 'source-map',
   stats: {
-    children: true
+    children: true,
+    errorDetails: true
   },
   devServer: {
     static: {

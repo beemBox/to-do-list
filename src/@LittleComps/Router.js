@@ -44,7 +44,7 @@ export default class Router {
   }
 
   static handlePartialLocation = async (tplName) => {
-    const path = `src/templates/${tplName}.html`
+    const path = `./templates/${tplName}.html`
     const html = await fetch(path).then(data => data.text())
     return html
   }
@@ -52,7 +52,7 @@ export default class Router {
   static handleLocation = async () => {
     const path = window.location.pathname
     const route = Router.routes[path] || Router.routes[404]
-    const html = await fetch(`src/templates/${route}.html`)
+    const html = await fetch(`./templates/${route}.html`)
       .then(data => data.text())
     return html
   }

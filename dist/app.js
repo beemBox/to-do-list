@@ -11,19 +11,6 @@
 return /******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/assets/css/style.css":
-/*!**********************************!*\
-  !*** ./src/assets/css/style.css ***!
-  \**********************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
 /***/ "./src/@LittleComps/BaseComponent.js":
 /*!*******************************************!*\
   !*** ./src/@LittleComps/BaseComponent.js ***!
@@ -265,7 +252,7 @@ class Router {
   }
 
   static handlePartialLocation = async (tplName) => {
-    const path = `src/templates/${tplName}.html`
+    const path = `./templates/${tplName}.html`
     const html = await fetch(path).then(data => data.text())
     return html
   }
@@ -273,7 +260,7 @@ class Router {
   static handleLocation = async () => {
     const path = window.location.pathname
     const route = Router.routes[path] || Router.routes[404]
-    const html = await fetch(`src/templates/${route}.html`)
+    const html = await fetch(`./templates/${route}.html`)
       .then(data => data.text())
     return html
   }
@@ -1468,21 +1455,19 @@ var __webpack_exports__ = {};
   !*** ./src/app.js ***!
   \********************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _assets_css_style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./assets/css/style.css */ "./src/assets/css/style.css");
-/* harmony import */ var _assets_vendors_gsap_min_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./assets/vendors/gsap.min.js */ "./src/assets/vendors/gsap.min.js");
-/* harmony import */ var _assets_vendors_gsap_min_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_assets_vendors_gsap_min_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _LittleComps_Core_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./@LittleComps/Core.js */ "./src/@LittleComps/Core.js");
-/* harmony import */ var _components_App_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/App.js */ "./src/components/App.js");
-/* harmony import */ var _components_Nav_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Nav.js */ "./src/components/Nav.js");
-/* harmony import */ var _components_Header_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Header.js */ "./src/components/Header.js");
-/* harmony import */ var _components_Hero_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Hero.js */ "./src/components/Hero.js");
-/* harmony import */ var _components_SideText_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/SideText.js */ "./src/components/SideText.js");
-/* harmony import */ var _components_ToDoListContent_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/ToDoListContent.js */ "./src/components/ToDoListContent.js");
-/* harmony import */ var _components_MyTasks_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/MyTasks.js */ "./src/components/MyTasks.js");
-/* harmony import */ var _components_Footer_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/Footer.js */ "./src/components/Footer.js");
-/* harmony import */ var _components_TaskList_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/TaskList.js */ "./src/components/TaskList.js");
-/* harmony import */ var _components_AppMenu_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/AppMenu.js */ "./src/components/AppMenu.js");
-
+/* harmony import */ var _assets_vendors_gsap_min_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./assets/vendors/gsap.min.js */ "./src/assets/vendors/gsap.min.js");
+/* harmony import */ var _assets_vendors_gsap_min_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_assets_vendors_gsap_min_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _LittleComps_Core_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./@LittleComps/Core.js */ "./src/@LittleComps/Core.js");
+/* harmony import */ var _components_App_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/App.js */ "./src/components/App.js");
+/* harmony import */ var _components_Nav_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Nav.js */ "./src/components/Nav.js");
+/* harmony import */ var _components_Header_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Header.js */ "./src/components/Header.js");
+/* harmony import */ var _components_Hero_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Hero.js */ "./src/components/Hero.js");
+/* harmony import */ var _components_SideText_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/SideText.js */ "./src/components/SideText.js");
+/* harmony import */ var _components_ToDoListContent_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/ToDoListContent.js */ "./src/components/ToDoListContent.js");
+/* harmony import */ var _components_MyTasks_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/MyTasks.js */ "./src/components/MyTasks.js");
+/* harmony import */ var _components_Footer_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Footer.js */ "./src/components/Footer.js");
+/* harmony import */ var _components_TaskList_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/TaskList.js */ "./src/components/TaskList.js");
+/* harmony import */ var _components_AppMenu_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/AppMenu.js */ "./src/components/AppMenu.js");
 
 
 
@@ -1498,20 +1483,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // Simulando el decorator pattern, aunque básicamente hace algo similar
-(0,_LittleComps_Core_js__WEBPACK_IMPORTED_MODULE_2__.$LConfig)({
+(0,_LittleComps_Core_js__WEBPACK_IMPORTED_MODULE_1__.$LConfig)({
   components: [{
-    'jotter-app': _components_App_js__WEBPACK_IMPORTED_MODULE_3__["default"],
-    'nav-bar': _components_Nav_js__WEBPACK_IMPORTED_MODULE_4__["default"],
-    'app-header': _components_Header_js__WEBPACK_IMPORTED_MODULE_5__["default"],
-    'to-do-hero': _components_Hero_js__WEBPACK_IMPORTED_MODULE_6__["default"],
-    'side-text': _components_SideText_js__WEBPACK_IMPORTED_MODULE_7__["default"],
-    'to-do-list-content': _components_ToDoListContent_js__WEBPACK_IMPORTED_MODULE_8__["default"],
-    'app-footer': _components_Footer_js__WEBPACK_IMPORTED_MODULE_10__["default"],
-    'my-tasks': _components_MyTasks_js__WEBPACK_IMPORTED_MODULE_9__["default"],
-    'tasks-list': _components_TaskList_js__WEBPACK_IMPORTED_MODULE_11__["default"],
-    'app-menu': _components_AppMenu_js__WEBPACK_IMPORTED_MODULE_12__["default"]
+    'jotter-app': _components_App_js__WEBPACK_IMPORTED_MODULE_2__["default"],
+    'nav-bar': _components_Nav_js__WEBPACK_IMPORTED_MODULE_3__["default"],
+    'app-header': _components_Header_js__WEBPACK_IMPORTED_MODULE_4__["default"],
+    'to-do-hero': _components_Hero_js__WEBPACK_IMPORTED_MODULE_5__["default"],
+    'side-text': _components_SideText_js__WEBPACK_IMPORTED_MODULE_6__["default"],
+    'to-do-list-content': _components_ToDoListContent_js__WEBPACK_IMPORTED_MODULE_7__["default"],
+    'app-footer': _components_Footer_js__WEBPACK_IMPORTED_MODULE_9__["default"],
+    'my-tasks': _components_MyTasks_js__WEBPACK_IMPORTED_MODULE_8__["default"],
+    'tasks-list': _components_TaskList_js__WEBPACK_IMPORTED_MODULE_10__["default"],
+    'app-menu': _components_AppMenu_js__WEBPACK_IMPORTED_MODULE_11__["default"]
   }],
-  bootstrap: [_components_App_js__WEBPACK_IMPORTED_MODULE_3__["default"]],
+  bootstrap: [_components_App_js__WEBPACK_IMPORTED_MODULE_2__["default"]],
   routes: {
     '/': 'landing-page',
     '/my-tasks': 'my-tasks',
