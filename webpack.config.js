@@ -22,7 +22,6 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist/'),
     filename: '[name].js',
-    publicPath: '/dist/',
     libraryTarget: 'umd',
     environment: {
       arrowFunction: false,
@@ -43,15 +42,17 @@ module.exports = {
       },
       {
         test: /\.(html)$/i,
-        include: /tempaltes/,
+        include: /templates/,
         use: 'html-loader',
       },
       {
         test: /\.css$/i,
         use: [{
           loader: MiniCssExtractPlugin.loader,
-          options: {}
-        }],
+          options: {
+            publicPath: 'dist/'
+          }
+        }, 'css-loader'],
         exclude: /node_modules/
       },
       {
@@ -80,6 +81,7 @@ module.exports = {
       inject: 'body',
       title: title
     }),
+    new MiniCssExtractPlugin(),
     new CopyPlugin({
       patterns: [
         { from: "src/assets", to: "assets" },

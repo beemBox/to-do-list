@@ -1,4 +1,4 @@
-
+// import './assets/css/style.css'
 import './assets/vendors/gsap.min.js'
 import { $LConfig } from './@LittleComps/Core.js'
 import App from './components/App.js'
@@ -15,7 +15,7 @@ import AppMenu from './components/AppMenu.js'
 // Simulando el decorator pattern, aunque básicamente hace algo similar
 $LConfig({
   components: [{
-    'jotter-app': App,
+    'lister-app': App, // verificado que toma cualquier nombre y funciona el fw
     'nav-bar': Nav,
     'app-header': Header,
     'to-do-hero': Hero,

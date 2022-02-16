@@ -1468,7 +1468,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Footer_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Footer.js */ "./src/components/Footer.js");
 /* harmony import */ var _components_TaskList_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/TaskList.js */ "./src/components/TaskList.js");
 /* harmony import */ var _components_AppMenu_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/AppMenu.js */ "./src/components/AppMenu.js");
-
+// import './assets/css/style.css'
 
 
 
@@ -1485,7 +1485,7 @@ __webpack_require__.r(__webpack_exports__);
 // Simulando el decorator pattern, aunque básicamente hace algo similar
 (0,_LittleComps_Core_js__WEBPACK_IMPORTED_MODULE_1__.$LConfig)({
   components: [{
-    'jotter-app': _components_App_js__WEBPACK_IMPORTED_MODULE_2__["default"],
+    'lister-app': _components_App_js__WEBPACK_IMPORTED_MODULE_2__["default"], // verificado que toma cualquier nombre y funciona el fw
     'nav-bar': _components_Nav_js__WEBPACK_IMPORTED_MODULE_3__["default"],
     'app-header': _components_Header_js__WEBPACK_IMPORTED_MODULE_4__["default"],
     'to-do-hero': _components_Hero_js__WEBPACK_IMPORTED_MODULE_5__["default"],
