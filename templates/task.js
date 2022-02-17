@@ -1,4 +1,4 @@
-export const template = {
+export default {
   get task() {
     const taskTpl = document.createElement('template')
     taskTpl = `
