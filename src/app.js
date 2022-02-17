@@ -1,5 +1,5 @@
 // import './assets/css/style.css'
-// import './assets/vendors/gsap.min.js'
+import './assets/vendors/gsap.min.js'
 import { $LConfig } from './@LittleComps/Core.js'
 import App from './components/App.js'
 import Nav from './components/Nav.js'
