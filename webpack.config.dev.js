@@ -23,6 +23,15 @@ module.exports = merge(common, {
     },
     clean: true,
   },
+  module: {
+    rules: [
+      {
+        test: /\.s?css$/i,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+        exclude: /node_modules/,
+      },
+    ],
+  },
   devtool: 'source-map',
   stats: {
     children: true,

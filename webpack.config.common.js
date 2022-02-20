@@ -11,6 +11,7 @@ const srcDir = 'src/';
 
 module.exports = {
   entry: {
+    vendor: path.resolve(__dirname, srcDir + '/vendor.js'),
     app: path.resolve(__dirname, srcDir + '/app.js'),
   },
   resolve: {
@@ -32,11 +33,6 @@ module.exports = {
         test: /\.(html)$/i,
         include: /templates/,
         use: 'html-loader',
-      },
-      {
-        test: /\.s?css$/i,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
-        exclude: /node_modules/,
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,

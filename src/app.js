@@ -1,16 +1,15 @@
-import './assets/vendors/gsap.min.js';
 import './assets/css/style.scss';
-import { $LConfig } from './@LittleComps/Core.js';
-import App from './components/App.js';
-import Nav from './components/Nav.js';
-import Header from './components/Header.js';
-import Hero from './components/Hero.js';
-import SideText from './components/SideText.js';
-import ToDoListContent from './components/ToDoListContent.js';
-import MyTasks from './components/MyTasks.js';
-import Footer from './components/Footer.js';
-import TasksList from './components/TaskList.js';
-import AppMenu from './components/AppMenu.js';
+import { $LConfig } from './@LittleComps/Core';
+import App from './components/App';
+import Nav from './components/Nav';
+import Header from './components/Header';
+import Hero from './components/Hero';
+import SideText from './components/SideText';
+import ToDoListContent from './components/ToDoListContent';
+import MyTasks from './components/MyTasks';
+import Footer from './components/Footer';
+import TasksList from './components/TaskList';
+import AppMenu from './components/AppMenu';
 
 // Simulando el decorator pattern, aunque básicamente hace algo similar
 $LConfig({
