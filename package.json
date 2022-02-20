@@ -5,9 +5,10 @@
   "main": "dist/app.js",
   "es6": "src/app.js",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --config webpack.config.dev.js",
+    "build-prod": "webpack --config webpack.config.prod.js",
     "debug:webpack": "node --inspect --inspect-brk ./node_modules/webpack/bin/webpack.js",
-    "dev-mode": "webpack-dev-server --mode development --open"
+    "dev-mode": "webpack serve --mode development --config webpack.config.dev.js --open"
   },
   "keywords": [],
   "author": "Mariano Silva",
@@ -44,11 +45,16 @@
     "html-webpack-link-type-plugin": "^1.1.1",
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.5.3",
+    "node-sass": "^7.0.1",
+    "postcss-cachebuster": "^0.1.6",
+    "postcss-loader": "^6.2.1",
     "raw-loader": "^4.0.2",
+    "sass-loader": "^12.6.0",
     "style-loader": "^3.3.1",
     "url-loader": "^4.1.1",
     "webpack": "^5.68.0",
     "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.7.4"
+    "webpack-dev-server": "^4.7.4",
+    "webpack-merge": "^5.8.0"
   }
 }

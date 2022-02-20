@@ -37,10 +37,10 @@ export default class MyTasks extends BaseComponent {
   }
 
   async getPartialContent(tplName, type) {
-    // if (type === 'section')
-    //   this.content.section = await Router.handlePartialLocation(tplName)
-    // else
-    //   this.content.section = await Router.handlePartialLocation(tplName)
+    if (type === 'section')
+      this.content.section = await Router.handlePartialLocation(tplName)
+    else
+      this.content.section = await Router.handlePartialLocation(tplName)
     this.content.section = ''
     this.render()
   }
