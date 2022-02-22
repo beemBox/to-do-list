@@ -1,54 +1,50 @@
-import BaseComponent from '../@LittleComps/BaseComponent.js'
-import Router from '../@LittleComps/Router.js'
+import BaseComponent from '../@LittleComps/BaseComponent.js';
+import Router from '../@LittleComps/Router.js';
 
 export default class Nav extends BaseComponent {
   constructor() {
-    super()
+    super();
   }
 
   static get observedAttributes() {
-    return ['link']
+    return ['link'];
   }
 
-  attributeChangedCallback() {
-
-  }
+  attributeChangedCallback() {}
 
   connectedCallback() {
-    this.render()
-    let btns = this.findAll('a')
+    this.render();
+    let btns = this.findAll('a');
     // respetamos el YAGNI principle y volvemos esto a la normalidad
-    btns.forEach(btn => {
+    btns.forEach((btn) => {
       btn.addEventListener('click', (e) => {
-        this.animateContentChange()
-        this.routeLink(e)
-      })
-    })
+        this.animateContentChange();
+        this.routeLink(e);
+      });
+    });
   }
 
   animateContentChange() {
-    let theContent = this.find('#wrapper')
-    gsap.to(theContent,
-      {
-        opacity: 0,
-        duration: 1,
-        delay: 0.35,
-      }
-    )
+    let theContent = this.find('#wrapper');
+    gsap.to(theContent, {
+      opacity: 0,
+      duration: 1,
+      delay: 0.35,
+    });
   }
 
   render() {
-    this.innerHTML = /*html*/`
+    this.innerHTML = /*html*/ `
     <nav>
       <a href='/'>
         <div class="logo">
-          <h1>My Lister</h1>
+          <h1>iJOTTER</h1>
         </div>
       </a>
       <ul>
         <li><a href='/my-tasks'>My Tasks</a></li>
         <li><a href='/profile'>Profile</a></li>
       </ul>
-    </nav>`
+    </nav>`;
   }
 }

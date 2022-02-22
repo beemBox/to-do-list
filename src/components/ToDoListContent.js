@@ -1,7 +1,7 @@
-import BaseComponent from '../@LittleComps/BaseComponent.js'
 import Router from '../@LittleComps/Router.js'
+import { ContentHandler } from '../@LittleComps/Core.js'
 
-export default class ToDoListContent extends BaseComponent {
+export default class ToDoListContent extends ContentHandler {
   constructor() {
     super()
     this.content = ''
@@ -42,38 +42,10 @@ export default class ToDoListContent extends BaseComponent {
     this.setChildrenComponentsObserver()
   }
 
-  setChildrenComponentsObserver() {
-    this.observer = new MutationObserver(this.childrenMutation)
-    this.observer.observe(this, {
-      attributes: true,
-      childList: true,
-      subtree: true
-    })
-  }
-
-  childrenMutation(mutations) {
-    const added = []
-
-    for (const mutation of mutations)
-      added.push(...mutation.addedNodes)
-
-    // console.log({ added: added.filter(el => el.nodeType === Node.ELEMENT_NODE) })
-    // console.log(added)
-  }
-
-  unsetChildrenComponentsObserver() {
-    this.observer.disconnect()
-  }
 
   connectedCallback() {
-    this.setChildrenComponentsObserver()
     this.updateContent()
   }
-
-  disconnectedCallback() {
-    this.unsetChildrenComponentsObserver()
-  }
-
 
   render() {
     this.innerHTML = `

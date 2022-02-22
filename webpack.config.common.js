@@ -38,7 +38,14 @@ module.exports = {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset',
         generator: {
-          filename: 'assets/img/[name]-[hash][ext]',
+          filename: 'assets/img/[name].[hash][ext]',
+        },
+      },
+      {
+        test: /\.(ico)$/i,
+        type: 'asset',
+        generator: {
+          filename: '[name].[hash].[ext]',
         },
       },
       {
@@ -54,7 +61,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       inject: 'body',
       filename: 'index.html',
-      title: title,
+      favicon: './src/assets/favicon/favicon.ico',
       template: './template.html',
     }),
     new CopyPlugin({

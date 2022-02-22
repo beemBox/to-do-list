@@ -104,6 +104,11 @@ nav {
     text-transform: uppercase;
     font-style: italic;
     font-weight: 600;
+
+    &:first-letter,
+    span:first-child {
+      text-transform: lowercase;
+    }
   }
 }
 
@@ -178,7 +183,7 @@ section.hero {
       span {
         padding: 0rem 0.4rem;
         color: var(--text);
-        display: block;
+        display: inline-block;
         text-shadow: var(--title) 0px 0px 40px;
       }
     }

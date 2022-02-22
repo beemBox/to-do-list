@@ -1,5 +1,5 @@
 import Router from './Router.js'
-import { ComponentsHandler } from './Core.js'
+import { ComponentsHandler } from './Core'
 
 export default class BaseComponent extends HTMLElement {
   constructor() {
@@ -8,7 +8,7 @@ export default class BaseComponent extends HTMLElement {
   }
 
   static register(elementName, component) {
-    return customElements.define(elementName, this)
+    return customElements.define(elementName, (component || this))
   }
 
   async updateContent() {

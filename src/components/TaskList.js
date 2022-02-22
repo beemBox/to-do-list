@@ -1,5 +1,5 @@
-import BaseComponent from '../@LittleComps/BaseComponent.js'
-import UserTaskList from '../class/UserTaskList.js'
+import BaseComponent from '../@LittleComps/BaseComponent'
+import UserTaskList from '../class/UserTaskList'
 
 export default class TasksList extends BaseComponent {
   _taskLists = []

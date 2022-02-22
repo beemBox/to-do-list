@@ -15,7 +15,7 @@ import AppMenu from './components/AppMenu';
 $LConfig({
   components: [
     {
-      'lister-app': App, // verificado que toma cualquier nombre y funciona el fw
+      'ijotter-app': App, // verificado que toma cualquier nombre y funciona el fw
       'nav-bar': Nav,
       'app-header': Header,
       'to-do-hero': Hero,

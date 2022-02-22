@@ -1,4 +1,5 @@
 import BaseComponent from '../@LittleComps/BaseComponent.js'
+import AButton from './atoms/Button'
 
 export default class AppMenu extends BaseComponent {
   constructor() {
@@ -71,6 +72,7 @@ export default class AppMenu extends BaseComponent {
         <button class='app__btn--menu create'>Create List</button>
         <button class='app__btn--menu clone'>Clone List</button>
         <button class='app__btn--menu remove'>Remove Lists</button>
+        <a-button></a-button>
       </div>
     </section>
     `

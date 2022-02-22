@@ -28,7 +28,7 @@ module.exports = merge(common, {
   },
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: '[name]-[contenthash].js',
+    filename: '[name].[contenthash].js',
     libraryTarget: 'umd',
     environment: {
       arrowFunction: false,
