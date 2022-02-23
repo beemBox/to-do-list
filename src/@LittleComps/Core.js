@@ -1,6 +1,7 @@
 import Router from './Router'
 import BaseComponent from './BaseComponent'
 import Utils from './Utils'
+import '../components/atoms'
 /**
  * Clase que almacena en cache los componentes para que sean usados desde otros componentes internos
  */
@@ -31,20 +32,45 @@ export class ComponentsHandler {
       .includes(mutationTargetName)
   }
 
+  static importAddedComponent = async (componentName, tagName) => {
+    // le agregué una librería... (varias...)
+    // const path = Router.componentsDirStructure.find(
+    //   route => route.id.toUpperCase() === componentName.charAt(0)
+    // ).path + componentName.slice(1) + '.js'
+    // let comp = function (component) {
+    // //   return new Function('return ' + component)()
+    // // }
+    // // document.addEventListener('DOMContentLoaded', () => {
+    // //   customElements.define(tagName, comp(componentName.slice(1)))
+    // // })
+
+
+    // import(componentName.slice(1))
+    //   .then((res) => {
+    //     debugger
+    //   })
+  }
+
   static * iterateAddedNodes(nodes) {
     for (let key in nodes)
       if (typeof nodes[key] !== 'function'
-        && nodes[key].constructor.__proto__.name !== 'CharacterData' && (typeof nodes[key] !== 'number')) {
+        && nodes[key].constructor.__proto__.name !== 'CharacterData'
+        && (typeof nodes[key] !== 'number')) {
         let node = nodes[key]
 
         if (node.children.length > 0)
           yield* ComponentsHandler.iterateAddedNodes(node.children)
-        else if (node.localName.match(/-/) && !ComponentsHandler.isApplicationComponent(node.localName)) {
+
+        else if (node.localName.match(/-/)
+          && !ComponentsHandler.isApplicationComponent(node.localName)) {
           let compName = '';
-          node = node.localName.split(/-/)
-          for (let key in node)
-            compName += node[key].charAt(0).toUpperCase() + node[key].slice(1)
-          yield compName
+          let compNameSplitted = node.localName.split(/-/)
+
+          for (let key in compNameSplitted)
+            compName += compNameSplitted[key]
+              .charAt(0).toUpperCase() + compNameSplitted[key].slice(1)
+
+          yield [compName, node]
         }
       }
   }
@@ -54,6 +80,7 @@ export class ComponentsHandler {
       if (mutation.type === 'childList'
         && ComponentsHandler.isApplicationComponent(mutation.target)) {
         const appComp = mutation
+
         if (appComp.addedNodes.length)
           yield* ComponentsHandler.iterateAddedNodes(appComp.addedNodes)
       }
@@ -65,8 +92,8 @@ export class ComponentsHandler {
     let res = genElement.next() // inicializamos el generator.
 
     while (!res.done) {
-      debugger
-      genElement.next()
+      ComponentsHandler.importAddedComponent(res.value[0], res.value[1])
+      res = genElement.next()
     }
   }
 }
@@ -125,35 +152,7 @@ export class ContentHandler extends BaseComponent {
   }
 
   childrenMutation(mutations) {
-    const added = []
-    // const components = Object.keys(ComponentsHandler.components)
-
     ComponentsHandler.registerNewComponent(mutations)
-    // filtro para que no sean elementos del DOM
-    // for (const mutation of mutations)
-    //   if (mutation.type === 'childList'
-    //     && ComponentsHandler.isApplicationComponent(mutation.target))
-    //     if (mutation.addedNodes.length) {
-    //       for (let key in mutation.addedNodes) {
-    //         if (typeof mutation.addedNodes[key] !== 'function') {
-    //           const el = mutation.addedNodes[key]
-    //           if (el instanceof BaseComponent
-    //             && !ComponentsHandler.isApplicationComponent(el)) {
-    //             console.log(mutation.addedNodes[key])// added.push(...mutation.addedNodes)
-
-    //           }
-
-    //           // node = node.length > 1 && Array.isArray(node)
-    //           //   ? node[1].replace(/\]/, '')
-    //           //   : node.length > 0 ? node[0].replace(/(\[\])+/g, '') : null
-
-    //           // if (node && !ContentHandler.WebTags.some(tag => tag.toLowerCase() === node.toLowerCase())
-    //           //   && !ComponentsHandler.isApplicationComponent(node))
-    //         }
-    //       }
-    //     }
-    // console.log({ added: added.filter(el => el.nodeType === Node.ELEMENT_NODE) })
-    // console.log(added)
   }
 
   // hacemos un singleton con primitive type Symbol: _webTags

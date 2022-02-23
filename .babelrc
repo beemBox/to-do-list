@@ -1,8 +1,10 @@
 {
-	"presets": [
-		"@babel/preset-env"
-	],
-	"plugins": [
-		"@babel/plugin-transform-runtime"
-	]
+  "presets": ["@babel/preset-env", { "exclude": ["proposal-dynamic-import"] }],
+  "plugins": [
+    "@babel/plugin-transform-runtime",
+    "@babel/plugin-syntax-dynamic-import",
+    "wildcard",
+    "wildcard-import",
+    "transform-decorators-legacy"
+  ]
 }

@@ -1,15 +1,17 @@
-import './assets/css/style.scss';
-import { $LConfig } from './@LittleComps/Core';
-import App from './components/App';
-import Nav from './components/Nav';
-import Header from './components/Header';
-import Hero from './components/Hero';
-import SideText from './components/SideText';
-import ToDoListContent from './components/ToDoListContent';
-import MyTasks from './components/MyTasks';
-import Footer from './components/Footer';
-import TasksList from './components/TaskList';
-import AppMenu from './components/AppMenu';
+import "core-js/modules/es.promise";
+import "core-js/modules/es.array.iterator";
+import './assets/css/style.scss'
+import { $LConfig } from './@LittleComps/Core'
+import App from './components/App'
+import Nav from './components/Nav'
+import Header from './components/Header'
+import Hero from './components/Hero'
+import SideText from './components/SideText'
+import ToDoListContent from './components/ToDoListContent'
+import MyTasks from './components/MyTasks'
+import Footer from './components/Footer'
+import TasksList from './components/TaskList'
+import TaskListsMenu from './components/ListsMenu'
 
 // Simulando el decorator pattern, aunque básicamente hace algo similar
 $LConfig({
@@ -24,7 +26,7 @@ $LConfig({
       'app-footer': Footer,
       'my-tasks': MyTasks,
       'tasks-list': TasksList,
-      'app-menu': AppMenu,
+      'app-menu': TaskListsMenu
     },
   ],
   bootstrap: [App],

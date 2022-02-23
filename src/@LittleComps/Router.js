@@ -24,11 +24,12 @@ export default class Router {
   }
 
   static get bootstrapName() {
-    return Object.keys(ComponentsHandler.components).find(comp => {
-      const def = ComponentsHandler.components[comp]
-      if (ComponentsHandler.bootstrap.some(boot => (boot === def)))
-        return comp
-    })
+    return Object.keys(ComponentsHandler.components)
+      .find(comp => {
+        const def = ComponentsHandler.components[comp]
+        if (ComponentsHandler.bootstrap.some(boot => (boot === def)))
+          return comp
+      })
   }
 
   static set Routes(routes) {
@@ -44,7 +45,7 @@ export default class Router {
   }
 
   static handlePartialLocation = async (tplName) => {
-    const path = `./templates/${tplName}.html`
+    const path = `../templates/${tplName}.html`
     const html = await fetch(path).then(data => data.text())
     return html
   }
@@ -52,9 +53,17 @@ export default class Router {
   static handleLocation = async () => {
     const path = window.location.pathname
     const route = Router.routes[path] || Router.routes[404]
-    const html = await fetch(`./templates/${route}.html`)
+    const html = await fetch(`../templates/${route}.html`)
       .then(data => data.text())
     return html
+  }
+
+  static get componentsDirStructure() {
+    return [
+      { id: 'A', path: '../components/atoms/' },
+      { id: 'M', path: '../components/molecules/' },
+      { id: 'O', path: '../components/organisms' }
+    ]
   }
 
   static start() {
@@ -62,12 +71,11 @@ export default class Router {
     main.setAttribute('onupdate', true)
     window.addEventListener('popstate', (e) => {
       Router.bootstrap.forEach(boot => {
-        debugger
-        document.getElementsByTagName(boot)[0]
-          .dispatchEvent(new CustomEvent('link', {
-            bubbles: true,
-            composed: true
-          }))
+        // document.getElementsByTagName(boot)[0]
+        //   .dispatchEvent(new CustomEvent('link', {
+        //     bubbles: true,
+        //     composed: true
+        //   }))
       })
     })
   }

@@ -1,7 +1,7 @@
-import BaseComponent from '../@LittleComps/BaseComponent.js'
-import AButton from './atoms/Button'
+import BaseComponent from '../@LittleComps/BaseComponent'
+import './atoms'
 
-export default class AppMenu extends BaseComponent {
+export default class TaskListsMenu extends BaseComponent {
   constructor() {
     super()
     this.addEventListener('option-select', this.handleEvent)
@@ -63,7 +63,6 @@ export default class AppMenu extends BaseComponent {
   render() {
     this.innerHTML = /*html*/`
     
-    ${this.style}
     <section class='app-menu__section'>
       <slot name="app-menu__heading">
         <h2>Menu</h2>
@@ -72,7 +71,8 @@ export default class AppMenu extends BaseComponent {
         <button class='app__btn--menu create'>Create List</button>
         <button class='app__btn--menu clone'>Clone List</button>
         <button class='app__btn--menu remove'>Remove Lists</button>
-        <a-button></a-button>
+        <a-button class='app__btn--menu remove'>Prueba botón</a-button>
+        <a-button class='app__btn--menu clone'>Prueba botón</a-button>
       </div>
     </section>
     `

@@ -9,3 +9,4 @@ dist/
 *.txt
 
 .babelrc
+npm-debug.log

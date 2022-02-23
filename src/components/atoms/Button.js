@@ -1,18 +1,13 @@
-import LCElement from '../../@LittleComps/LCElement';
+import LCElement from "../../@LittleComps/LCElement"
 
-export default class AButton extends LCElement {
-  constructor(...config) {
+export default class Button extends LCElement {
+  constructor() {
     super()
-    debugger;
   }
 
   connectedCallback() {
-    debugger;
+    this.render()
   }
 }
 
-const template = /*html*/`
-  <template>
-    <button>Hola!</button>
-  </template>
-`
+customElements.define('a-button', Button)

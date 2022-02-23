@@ -18,16 +18,29 @@ module.exports = {
     alias: {
       assets: path.resolve(__dirname, srcDir + '/assets/'),
       templates: path.resolve(__dirname, 'templates/'),
-      extensions: ['.js', '.json', 'css', 'html'],
     },
+    extensions: ['.js', '.json', '.mjs', '*'],
   },
   module: {
     rules: [
       {
-        test: /\.(js)$/,
+        test: /\.m?js$/,
         exclude: /(node_modules|assets\/vendors)*/,
         include: /class/,
-        use: 'babel-loader',
+        use: [{
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env', 'stage-0'],
+            plugins: [
+              '@babel/plugin-transform-runtime',
+              '@babel/plugin-proposal-dynamic-import',
+              ['@babel/plugin-proposal-decorators', { 'legacy': true }],
+              ['@babel/plugin-proposal-class-properties', { 'loose': true }],
+              'wildcard',
+              'wildcard-import'
+            ]
+          }
+        }],
       },
       {
         test: /\.(html)$/i,
@@ -69,6 +82,6 @@ module.exports = {
     }),
     new LinkTypePlugin({
       '*.css': 'text/css',
-    }),
+    })
   ],
 };
