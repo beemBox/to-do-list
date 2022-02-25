@@ -29,7 +29,6 @@ export default class MenuOptions extends BaseComponent {
 
     for (let btn of btns) {
       btn.addEventListener('click', (e) => {
-        debugger
         e.target.dispatchEvent(new CustomEvent('option-select', {
           bubbles: true,
           composed: true // esto es para shadow DOM
