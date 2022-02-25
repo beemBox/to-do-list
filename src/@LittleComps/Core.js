@@ -1,7 +1,7 @@
 import Router from './Router'
 import BaseComponent from './BaseComponent'
 import Utils from './Utils'
-import '../components/atoms'
+
 /**
  * Clase que almacena en cache los componentes para que sean usados desde otros componentes internos
  */

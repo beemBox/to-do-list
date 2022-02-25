@@ -32,7 +32,7 @@ module.exports = {
           options: {
             presets: ['@babel/preset-env', 'stage-0'],
             plugins: [
-              '@babel/plugin-transform-runtime',
+              ['@babel/plugin-transform-runtime', { 'polyfill': false }],
               '@babel/plugin-proposal-dynamic-import',
               ['@babel/plugin-proposal-decorators', { 'legacy': true }],
               ['@babel/plugin-proposal-class-properties', { 'loose': true }],

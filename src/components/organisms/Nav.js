@@ -1,5 +1,5 @@
-import BaseComponent from '../@LittleComps/BaseComponent.js';
-import Router from '../@LittleComps/Router.js';
+import BaseComponent from '../../@LittleComps/BaseComponent.js';
+import Router from '../../@LittleComps/Router.js';
 
 export default class Nav extends BaseComponent {
   constructor() {
@@ -10,7 +10,7 @@ export default class Nav extends BaseComponent {
     return ['link'];
   }
 
-  attributeChangedCallback() {}
+  attributeChangedCallback() { }
 
   connectedCallback() {
     this.render();
@@ -48,3 +48,5 @@ export default class Nav extends BaseComponent {
     </nav>`;
   }
 }
+
+customElements.define('o-nav-bar', Nav)

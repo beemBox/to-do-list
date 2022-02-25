@@ -1,6 +1,8 @@
-import BaseComponent from '../@LittleComps/BaseComponent.js'
-import Task from './Task.js'
-import Router from '../@LittleComps/Router.js'
+import BaseComponent from '../../@LittleComps/BaseComponent.js'
+import Task from '../molecules/Task.js'
+import Router from '../../@LittleComps/Router.js'
+import '../molecules/molecules'
+import '../organisms/organisms'
 
 // Acá voy a poner lo que teóricamente en el ejercicio del Prompt era TaskList
 // pero sí lo acompaño de una clase Task, sí la voy a hacer componente u_u
@@ -10,38 +12,43 @@ import Router from '../@LittleComps/Router.js'
 // del gateway y services así como de localStorage
 export default class MyTasks extends BaseComponent {
   _tasksList = []
+  _content = {
+    menu: '<o-menu-options></o-menu-options>',
+    section: `<o-task-lists type='list'></o-task-lists>`
+  }
 
   constructor() {
     super()
-    this.content = {
-      menu: '<app-menu></app-menu>',
-      section: `<tasks-list type='list'></tasks-list>`
-    }
-    this.addEventListener('option-select', this)
+    this.currentSection = 'create'
+    this.addEventListener('option-select', this.handleEvent)
   }
 
   handleEvent(e) {
+    debugger
     // verifico de que child component viene 
     //y obtengo el elemento que lo despachó
     switch (e.target.nodeName.toLowerCase()) {
-      case 'app-menu': // viene de los botones
+      case 'o-menu-options': // viene de los botones
         // son los botones de tasks list
         let el = e.path[0]
-        if (el.classList.toString().includes('create')) {
-          this.find('tasks-list').setAttribute('type', 'create')
+        debugger
+        this.currentSection = el.classList.toString().includes('create')
+        if (this.currentSection) {
+          this.find('o-tasks-lists').setAttribute('type', 'create')
         }
-        break
-      default:
         break
     }
   }
 
+  // Cambia la sección según el botón que se clickea
   async getPartialContent(tplName, type) {
     if (type === 'section')
       this.content.section = await Router.handlePartialLocation(tplName)
     else
       this.content.section = await Router.handlePartialLocation(tplName)
+
     this.content.section = ''
+    this.currentSection = type
     this.render()
   }
 
@@ -66,17 +73,17 @@ export default class MyTasks extends BaseComponent {
   }
 
   render() {
-    this.innerHTML = `
+    this.innerHTML = /*html */`
     <div class="app-content">
-      <div class="app-content__title title">
-        <h1>My Tasks</h1>
-      </div>
+      <m-mainheading class='app-content__title title'></m-mainheading>
       <aside class="app-content__menu menu-app">
-        ${this.content.menu}
+        ${this._content.menu}
       </aside>
       <section class="app-content__content content">
-        ${this.content.section}
+        ${this._content.section}
       </section>
     </div>`
   }
 }
+
+customElements.define('my-tasks', MyTasks)

@@ -1,0 +1,7 @@
+export { default as Footer } from './Footer'
+export { default as Hero } from './Hero'
+export { default as Header } from './Header'
+export { default as Nav } from './Nav'
+export { default as SideText } from './SideText'
+export { default as MenuOptions } from './MenuOptions'
+export { default as TaskLists } from './TaskLists'

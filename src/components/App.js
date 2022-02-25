@@ -1,11 +1,13 @@
-import ContentApp from './ToDoListContent.js'
+import ContentApp from './organisms/ToDoListContent.js'
 import Router from '../@LittleComps/Router.js'
+import * as Organisms from './organisms/organisms'
 
 export default class App extends ContentApp {
   constructor() {
     super()
     this.content = ``
     this.update = false
+    this.addEventListener('option-select', this.handleEvent)
   }
 
   static get observedAttributes() {
@@ -20,7 +22,7 @@ export default class App extends ContentApp {
   }
 
   updateContent() {
-    this.find('to-do-list-content').setAttribute('update', true)
+    this.find('o-todo-list-content').setAttribute('update', true)
   }
 
   connectedCallback() {
@@ -30,10 +32,10 @@ export default class App extends ContentApp {
 
   render() {
     this.innerHTML = `
-      <app-header></app-header>
-      <to-do-list-content update='${this.update}'></to-do-list-content>
-      <side-text></side-text>
-      <app-footer></app-footer>
+      <o-header></o-header>
+      <o-todo-list-content update='${this.update}'></o-todo-list-content>
+      <o-side-text></o-side-text>
+      <o-footer></o-footer>
     `
   }
 

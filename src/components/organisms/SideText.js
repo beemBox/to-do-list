@@ -1,4 +1,4 @@
-import BaseComponent from '../@LittleComps/BaseComponent.js'
+import BaseComponent from '../../@LittleComps/BaseComponent.js'
 
 export default class SideText extends BaseComponent {
   constructor() {
@@ -59,3 +59,5 @@ export default class SideText extends BaseComponent {
     `
   }
 }
+
+customElements.define('o-side-text', SideText)

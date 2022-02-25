@@ -1,5 +1,5 @@
-import BaseComponent from '../@LittleComps/BaseComponent.js'
-import Nav from './Nav.js'
+import BaseComponent from '../../@LittleComps/BaseComponent.js'
+import Nav from './Nav'
 
 export default class Header extends BaseComponent {
   constructor() {
@@ -14,7 +14,9 @@ export default class Header extends BaseComponent {
     this.innerHTML = `
     
     <header class="box header">
-      <nav-bar></nav-bar>
+      <o-nav-bar></o-nav-bar>
     </header>`
   }
 }
+
+customElements.define('o-header', Header)

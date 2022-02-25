@@ -25,6 +25,7 @@
   --shadow-sidetext-box: #0c111a;
   --input-analog: #43719c;
   --input-analog-hover: #284866;
+  --hr-color: #ff9849;
 }
 
 * {
@@ -58,6 +59,15 @@ h3 {
 
 h1 {
   font-size: 40px;
+}
+
+.title > hr {
+  border: none;
+  height: 2px;
+  border-radius: 4px;
+  background: var(--hr-color);
+  width: 100%;
+  margin: 0 auto;
 }
 
 h4,
@@ -104,10 +114,22 @@ nav {
     text-transform: uppercase;
     font-style: italic;
     font-weight: 600;
+    color: var(--input-analog);
 
     &:first-letter,
-    span:first-child {
+    span.span-logo:first-child {
+      font-family: 'serif';
+      color: var(--hr-color) !important;
       text-transform: lowercase;
+      margin-right: -9px;
+      vertical-align: super;
+      font-size: 24px;
+      font-weight: 900;
+    }
+
+    span.span-logo {
+      padding-right: 0 !important;
+      padding-left: 0 !important;
     }
   }
 }

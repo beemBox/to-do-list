@@ -1,5 +1,6 @@
-import Router from '../@LittleComps/Router.js'
-import { ContentHandler } from '../@LittleComps/Core.js'
+import Router from '../../@LittleComps/Router.js'
+import { ContentHandler } from '../../@LittleComps/Core.js'
+import '../pages/content'
 
 export default class ToDoListContent extends ContentHandler {
   constructor() {
@@ -7,7 +8,6 @@ export default class ToDoListContent extends ContentHandler {
     this.content = ''
     this.addEventListener('option-select', this.handleEvent)
   }
-
 
   static get observedAttributes() {
     return ['update']
@@ -24,10 +24,6 @@ export default class ToDoListContent extends ContentHandler {
       this.updateContent()
     }
     this.animateContentChange()
-  }
-
-  animateNewContent() {
-
   }
 
   animateContentChange() {
@@ -55,3 +51,5 @@ export default class ToDoListContent extends ContentHandler {
       `
   }
 }
+
+customElements.define('o-todo-list-content', ToDoListContent)

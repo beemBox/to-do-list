@@ -1,4 +1,4 @@
-import BaseComponent from '../@LittleComps/BaseComponent.js'
+import BaseComponent from '../../@LittleComps/BaseComponent.js'
 
 export default class Footer extends BaseComponent {
   constructor() {
@@ -17,3 +17,5 @@ export default class Footer extends BaseComponent {
     `
   }
 }
+
+customElements.define('o-footer', Footer)

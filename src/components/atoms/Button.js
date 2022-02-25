@@ -1,12 +1,13 @@
 import LCElement from "../../@LittleComps/LCElement"
 
 export default class Button extends LCElement {
+  template = 'this'
   constructor() {
     super()
   }
 
   connectedCallback() {
-    this.render()
+    // console.log(this['lc_id'])
   }
 }
 

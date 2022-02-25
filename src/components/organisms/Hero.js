@@ -1,11 +1,11 @@
-import BaseComponent from '../@LittleComps/BaseComponent.js';
+import BaseComponent from '../../@LittleComps/BaseComponent.js';
 
 export default class Hero extends BaseComponent {
   constructor() {
     super();
   }
 
-  addEventListeners() {}
+  addEventListeners() { }
 
   animateGsap() {
     const tl = gsap.timeline({
@@ -73,6 +73,29 @@ export default class Hero extends BaseComponent {
       { y: 0, opacity: 1 },
       '<'
     );
+
+    const tl2 = gsap.timeline({
+      defaults: {
+        duration: 0.35
+      },
+    });
+
+    // tl2.fromTo(
+    //   this.find('.img-container',
+    //     {
+    //       rotationX: 0,
+    //       rotationY: 0,
+    //       rotationZ: 0,
+
+    //     },
+    //     {
+    //       rotationX: 4,
+    //       rotationY: -54,
+    //       rotationZ: 3,
+    //       //perspective: '2866px'
+    //     }
+    //   )
+    // )
   }
 
   connectedCallback() {
@@ -90,13 +113,13 @@ export default class Hero extends BaseComponent {
   }
 
   render() {
-    this.innerHTML = `
+    this.innerHTML = /*html */`
     <section class="hero">
       <div class="img-container">
       </div>
       <div class="cta">
         <div class="cta-text logo">
-          <h2><span class="cta1">i</span><span class="cta2">jotter</span></h2>
+          <h2><span class="cta1 span-logo">i</span><span class="cta2 span-logo">jotter</span></h2>
         </div>
         <div class="cta-text">
           <h2><span class="cta3">TO</span></h2>
@@ -112,3 +135,5 @@ export default class Hero extends BaseComponent {
     `;
   }
 }
+
+customElements.define('o-hero', Hero)

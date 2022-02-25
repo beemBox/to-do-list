@@ -1,5 +1,5 @@
-import BaseComponent from '../@LittleComps/BaseComponent.js'
-import template from '../templates/task.js'
+import BaseComponent from '../../@LittleComps/BaseComponent.js'
+import template from '../../templates/task.js'
 
 export default class Task extends BaseComponent {
   constructor(taskName, dateTask, created, modified) {
@@ -24,6 +24,6 @@ export default class Task extends BaseComponent {
   set status(value) {
     this._status = value
   }
-
-
 }
+
+customElements.define('m-task', Task)

@@ -1,4 +1,4 @@
-import BaseComponent from '../@LittleComps/BaseComponent.js'
+import BaseComponent from '../../@LittleComps/BaseComponent.js'
 
 export default class LandingPage extends BaseComponent {
   constructor() {

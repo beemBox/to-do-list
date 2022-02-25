@@ -1,7 +1,7 @@
-import BaseComponent from '../@LittleComps/BaseComponent'
-import UserTaskList from '../class/UserTaskList'
+import BaseComponent from '../../@LittleComps/BaseComponent'
+import UserTaskList from '../../class/UserTaskList'
 
-export default class TasksList extends BaseComponent {
+export default class TaskLists extends BaseComponent {
   _taskLists = []
   newListName = ''
   newListObs = ''
@@ -211,7 +211,7 @@ export default class TasksList extends BaseComponent {
         ${this.style}
         <section class='lists__section'>
           <slot name='lists__heading'>
-            <h2>${heading}</h2>
+            <m-subdheading>${heading}</m-subheading>
           </slot>
           <div class='lists__collection'>
             ${innerContent}
@@ -219,3 +219,5 @@ export default class TasksList extends BaseComponent {
         </section >`
   }
 }
+
+customElements.define('o-task-lists', TaskLists)

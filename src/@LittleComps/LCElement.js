@@ -11,7 +11,13 @@ export default class LCElement extends BaseComponent {
   }
 
   setProps() {
-    const el = document.createElement(this.localName.split('-')[1])
+    let el
+
+    if (!this.hasAttribute('element'))
+      el = document.createElement(this.localName.split('-')[1])
+    else
+      el = document.createElement(this.getAttribute('element'))
+
     const props = Array.prototype.slice.call(this.attributes)
     this[lc_id] = uuid4()
     el.setAttribute('lc-id', this[lc_id])
@@ -30,21 +36,26 @@ export default class LCElement extends BaseComponent {
             el.setAttribute('id', this.class)
           }
           break
+        case 'text':
+          this.text = prop.value
+          break
         case 'type':
           if (!el.hasAttribute('type')) {
             this.type = prop.value
             el.setAttribute('type', this.class)
           }
-        default:
-          this.props[prop.name] = prop.value
       }
     })
-    this.text = this.innerHTML
+    el.innerText = this.text ?? this.innerHTML
     this.innerHTML = ''
-    el.innerText = this.text
     this.template = `${el}`
 
-    this.appendChild(el)
+    if (this.hasAttribute('before'))
+      this.parentElement.insertBefore(el, this.nextSibling)
+    else
+      this.parentElement.appendChild(el)
+
+    this.parentElement.removeChild(this)
   }
 
   connectedCallback() {
